@@ -6,8 +6,9 @@
 /**
  * The class containing the main method.
  *
- * @author {Your Name Here}
- * @version {Put Something Here}
+ * @author Jae Trimboli (jaetrim)
+ * @author Mohammad Mian (mohammadm21)
+ * @version 2023-19-09 
  */
 
 // On my honor:
@@ -34,9 +35,16 @@ public class SemSearch {
     /**
      * @param args
      *     Command line parameters
+     * @throws Exception
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // This is the main file for the program.
         Seminar dum = new Seminar();
+        if (args == null){
+            throw new Exception("No Args");
+        }
+        int worldSize = Integer.parseInt(args[0]);
+        String file = args[1];
+        new FileReader(worldSize, file);
     }
 }
