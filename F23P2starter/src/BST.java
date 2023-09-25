@@ -34,13 +34,15 @@ public class BST<K extends Comparable<K>, E> {
         if (node == null) {
             return;
         }
-        if (low.compareTo(node.value().key()) > 0) {
-            rangeSearch(node.right(), low, high);
-        }
-        if (low.compareTo(node.value().key()) == 0) {
-            System.out.println(node.value().value());
-        }
         rangeSearch(node.left(), low, high);
+        if (low.compareTo(node.value().key()) <= 0 && high.compareTo(node
+            .value().key()) >= 0) {
+            System.out.println(node.value().value());
+            
+        }
+        rangeSearch(node.right(), low, high);
+
+    
     }
 
 

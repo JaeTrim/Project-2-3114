@@ -64,9 +64,9 @@ public class SeminarDB {
                     keywordTree.insert(keywordPair);
                 }
 
-                System.out.println("\nSuccessfully inserted record with ID " + sem
-                    .id());
-                System.out.print(sem.toString());
+                System.out.println("Successfully inserted record with ID "
+                    + sem.id());
+                System.out.print(sem.toString() +"\n");
             }
 
         }
@@ -87,6 +87,7 @@ public class SeminarDB {
      */
     public void searchID(int id) {
         if (idTree.findValue(id) != null) {
+            System.out.println("Found Record with ID " + id + ":");
             Seminar sem = (Seminar)idTree.findValue(id);
             System.out.print(sem.toString());
         }
@@ -106,7 +107,9 @@ public class SeminarDB {
      *            is high cost
      */
     public void searchCost(int low, int high) {
-
+        System.out.println("\nSeminars with costs in range " + low + " to "
+            + high + ":");
+        costTree.rangeSearch(costTree.getRoot(), low, high);
     }
 
 
@@ -121,7 +124,10 @@ public class SeminarDB {
      *            second date or time
      */
     public void searchDate(String date1, String date2) {
-
+        System.out.println("Seminars with dates in range " + date1 + " to "
+            + date2 + ":");
+        dateTree.rangeSearch(dateTree.getRoot(), date1,
+            date2);
     }
 
 
@@ -136,6 +142,7 @@ public class SeminarDB {
         keywordTree.rangeSearch(keywordTree.getRoot(), word, word);
 
     }
+
 
     /**
      * Search function that prints all records that fall within radius distance
@@ -161,6 +168,11 @@ public class SeminarDB {
      *            of record
      */
     public void delete(int id) {
+        if (idTree.findValue(id) != null) {
+            idTree.remove(id);
+            System.out.println("Record with ID " + id
+                + " successfully deleted from the database");
+        }
 
     }
 
@@ -172,23 +184,54 @@ public class SeminarDB {
      * @param command
      */
     public void print(String command) {
+
         if (command.equals("ID")) {
             if (idTree.size() == 0) {
                 System.out.println("ID Tree:");
                 System.out.println("This tree is empty");
             }
             else {
-                System.out.println("\nID Tree:");
+                System.out.println("ID Tree:");
                 idTree.print();
-                
                 System.out.println("Number of records: " + idTree.size());
             }
+
         }
         if (command.equals("keyword")) {
-            System.out.println("Keyword Tree:");
-            keywordTree.print();
-            System.out.println("Number of records: " + keywordTree.size());
-        }
+            if (keywordTree.size() == 0) {
+                System.out.println("Keyword Tree:");
+                System.out.println("This tree is empty");
+            }
+            else {
+                System.out.println("Keyword Tree:");
+                keywordTree.print();
+                System.out.println("Number of records: " + keywordTree.size());
+            }
 
+        }
+        if (command.equals("cost")) {
+            if (costTree.size() == 0) {
+                System.out.println("Cost Tree:");
+                System.out.println("This tree is empty");
+            }
+            else {
+                System.out.println("Cost Tree:");
+                costTree.print();
+                System.out.println("Number of records: " + costTree.size());
+            }
+
+        }
+        if (command.equals("date")) {
+            if (dateTree.size() == 0) {
+                System.out.println("Date Tree:");
+                System.out.println("This tree is empty");
+            }
+            else {
+                System.out.println("Date Tree:");
+                dateTree.print();
+                System.out.println("Number of records: " + dateTree.size());
+            }
+
+        }
     }
 }
