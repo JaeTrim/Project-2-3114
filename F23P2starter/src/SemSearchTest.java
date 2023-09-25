@@ -15,8 +15,9 @@ public class SemSearchTest extends TestCase {
 
     /**
      * Get code coverage of the class declaration.
+     * @throws Exception 
      */
-    public void testMInitx()
+    public void testMInitx() throws Exception
     {
         SemSearch sem = new SemSearch();
         assertNotNull(sem);

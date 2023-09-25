@@ -8,84 +8,162 @@
  */
 public class SeminarDB {
 
+    private BST idTree;
+    private BST costTree;
+    private BST dateTree;
+    private BST keywordTree;
+    private BST location;
+
+    // create binary search trees for various search commands
+
     /**
      * Seminar DB Constructor
      * 
-     * @param size inputted world size
-     * @param name of file
+     * @param size
+     *            inputted world size
+     * @param name
+     *            of file
      */
     public SeminarDB(int size, String name) {
-
+        idTree = new BST();
+        costTree = new BST();
+        dateTree = new BST();
+        keywordTree = new BST();
+        location = new BST();
     }
+
 
     /**
-     * Inseets seminar object into each of the trees
+     * Inserts seminar object into each of the trees
      * 
-     * @param sem representing Seminar
+     * @param sem
+     *            representing Seminar
      */
+    @SuppressWarnings("unchecked")
     public void insert(Seminar sem) {
+        KVPair<Integer, Seminar> idPair = new KVPair<Integer, Seminar>(sem.id(),
+            sem);
+        KVPair<Integer, Seminar> costPair = new KVPair<Integer, Seminar>(sem
+            .cost(), sem);
+        KVPair<String, Seminar> datePair = new KVPair<String, Seminar>(sem
+            .date(), sem);
+
+        if (idTree.findValue(sem.id()) == null) {
+            if (sem.x() < 0 || sem.y() < 0 || sem.x() >= 128 || sem
+                .y() >= 128) {
+                System.out.println("Insert FAILED - Bad x, y coordinates: "
+                    + sem.x() + ", " + sem.y());
+            }
+            else {
+                idTree.insert(idPair);
+                costTree.insert(costPair);
+                dateTree.insert(datePair);
+                for (int i = 0; i < sem.keywords().length; i++) {
+                    KVPair<String, Seminar> keywordPair =
+                        new KVPair<String, Seminar>(sem.keywords()[i], sem);
+                    keywordTree.insert(keywordPair);
+                }
+
+                System.out.println("Successfully inserted record with ID " + sem
+                    .id());
+                System.out.print(sem.toString());
+            }
+
+        }
+        else {
+            System.out.println(
+                "Insert FAILED - There is already a record with ID " + sem
+                    .id());
+        }
 
     }
+
 
     /**
      * Search function for printing the record that matches the given ID
      * 
-     * @param id is the id of record
+     * @param id
+     *            is the id of record
      */
+    @SuppressWarnings("unchecked")
     public void searchID(int id) {
-
+        if (idTree.findValue(id) != null) {
+            Seminar sem = (Seminar)idTree.findValue(id);
+            System.out.print(sem.toString());
+        }
+        else {
+            System.out.println("Search FAILED -- There is no record with ID "
+                + id);
+        }
     }
+
 
     /**
      * Search function that prints all records that fall within the range
      * 
-     * @param low  is low cost
-     * @param high is high cost
+     * @param low
+     *            is low cost
+     * @param high
+     *            is high cost
      */
     public void searchCost(int low, int high) {
 
     }
 
+
     /**
-     * Search function for printing all records that fall within a range of dates /
+     * Search function for printing all records that fall within a range of
+     * dates /
      * times
      * 
-     * @param date1 first date or time
-     * @param date2 second date or time
+     * @param date1
+     *            first date or time
+     * @param date2
+     *            second date or time
      */
     public void searchDate(String date1, String date2) {
 
     }
 
+
     /**
      * Search function that prints all records that match the keyword
      * 
-     * @param word for keyword
+     * @param word
+     *            for keyword
      */
     public void searchKeyword(String word) {
-
+        
     }
 
+
     /**
-     * Search function that prints all records that fall within radius distance of
+     * Search function that prints all records that fall within radius distance
+     * of
      * the search point
      * 
-     * @param xCoor is X coordinate
-     * @param yCoor is Y coordinate
-     * @param rad   is the radius
+     * @param xCoor
+     *            is X coordinate
+     * @param yCoor
+     *            is Y coordinate
+     * @param rad
+     *            is the radius
      */
     public void searchLocation(int xCoor, int yCoor, int rad) {
 
     }
 
+
     /**
      * Deletes a record with the given ID from ALL search trees
      * 
-     * @param id of record
+     * @param id
+     *            of record
      */
     public void delete(int id) {
 
     }
+
 
     /**
      * Depending on which print command is passed, print out a traversal of the
@@ -94,6 +172,16 @@ public class SeminarDB {
      * @param command
      */
     public void print(String command) {
+        if (command.equals("ID")) {
+            if (idTree.size() == 0) {
+                System.out.println("ID Tree:");
+                System.out.println("This tree is empty");
+            }
+            else {
+                idTree.print();
+                System.out.println("Number of records: " + idTree.size());
+            }
+        }
 
     }
 }
