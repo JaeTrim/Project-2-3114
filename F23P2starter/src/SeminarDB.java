@@ -8,10 +8,10 @@
  */
 public class SeminarDB {
 
-    private BST idTree;
-    private BST costTree;
-    private BST dateTree;
-    private BST keywordTree;
+    private BST<Integer, Seminar> idTree;
+    private BST<Integer, Seminar> costTree;
+    private BST<String, Seminar> dateTree;
+    private BST<String, Seminar> keywordTree;
     private BST location;
 
     // create binary search trees for various search commands
@@ -25,10 +25,10 @@ public class SeminarDB {
      *            of file
      */
     public SeminarDB(int size, String name) {
-        idTree = new BST();
-        costTree = new BST();
-        dateTree = new BST();
-        keywordTree = new BST();
+        idTree = new BST<Integer, Seminar>();
+        costTree = new BST<Integer, Seminar>();
+        dateTree = new BST<String, Seminar>();
+        keywordTree = new BST<String, Seminar>();
         location = new BST();
     }
 
@@ -39,7 +39,7 @@ public class SeminarDB {
      * @param sem
      *            representing Seminar
      */
-    @SuppressWarnings("unchecked")
+
     public void insert(Seminar sem) {
         KVPair<Integer, Seminar> idPair = new KVPair<Integer, Seminar>(sem.id(),
             sem);
@@ -64,7 +64,7 @@ public class SeminarDB {
                     keywordTree.insert(keywordPair);
                 }
 
-                System.out.println("Successfully inserted record with ID " + sem
+                System.out.println("\nSuccessfully inserted record with ID " + sem
                     .id());
                 System.out.print(sem.toString());
             }
@@ -85,7 +85,6 @@ public class SeminarDB {
      * @param id
      *            is the id of record
      */
-    @SuppressWarnings("unchecked")
     public void searchID(int id) {
         if (idTree.findValue(id) != null) {
             Seminar sem = (Seminar)idTree.findValue(id);
@@ -133,9 +132,10 @@ public class SeminarDB {
      *            for keyword
      */
     public void searchKeyword(String word) {
-        
-    }
+        System.out.println("Seminars matching keyword " + word + ":");
+        keywordTree.rangeSearch(keywordTree.getRoot(), word, word);
 
+    }
 
     /**
      * Search function that prints all records that fall within radius distance
@@ -178,9 +178,16 @@ public class SeminarDB {
                 System.out.println("This tree is empty");
             }
             else {
+                System.out.println("\nID Tree:");
                 idTree.print();
+                
                 System.out.println("Number of records: " + idTree.size());
             }
+        }
+        if (command.equals("keyword")) {
+            System.out.println("Keyword Tree:");
+            keywordTree.print();
+            System.out.println("Number of records: " + keywordTree.size());
         }
 
     }

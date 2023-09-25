@@ -28,8 +28,20 @@ public class BST<K extends Comparable<K>, E> {
     public BSTNode<KVPair<K, E>> getRoot() {
         return root;
     }
-    
-    
+
+
+    public void rangeSearch(BSTNode<KVPair<K, E>> node, K low, K high) {
+        if (node == null) {
+            return;
+        }
+        if (low.compareTo(node.value().key()) > 0) {
+            rangeSearch(node.right(), low, high);
+        }
+        if (low.compareTo(node.value().key()) == 0) {
+            System.out.println(node.value().value());
+        }
+        rangeSearch(node.left(), low, high);
+    }
 
 
     public E findValue(K key) {
@@ -174,7 +186,5 @@ public class BST<K extends Comparable<K>, E> {
         System.out.println(bstNode.value().key());
         printTree(bstNode.left());
     }
-
-
 
 }
