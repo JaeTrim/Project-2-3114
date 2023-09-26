@@ -3,12 +3,12 @@
  */
 public class SearchResult {
     
-    StringBuilder output;
+    String output;
     int nodesVisited;
     
     public SearchResult()  
     {        
-        output = new StringBuilder();
+        output = "";
         nodesVisited = 1;
     }
     
@@ -17,7 +17,7 @@ public class SearchResult {
         return nodesVisited;
     }
     
-    public StringBuilder getOutput()
+    public String getOutput()
     {
         return output;
     }
@@ -27,7 +27,7 @@ public class SearchResult {
         nodesVisited = num;
     }
     
-    public void setOutput(StringBuilder str)
+    public void setOutput(String str)
     {
         output = str;
     }

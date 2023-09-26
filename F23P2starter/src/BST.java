@@ -41,7 +41,7 @@ public class BST<K extends Comparable<K>, E> {
         }
         if (low.compareTo(node.value().key()) <= 0 && high.compareTo(node
             .value().key()) >= 0) {
-            output.getOutput().append(node.value().value().toString() + "\n");
+            output.setOutput(output.getOutput()+ node.value().value().toString() + "\n");
             
         }
         if (node.value().key().compareTo(high) < 0)
@@ -182,12 +182,7 @@ public class BST<K extends Comparable<K>, E> {
 
 
     private void printTree(BSTNode<KVPair<K, E>> bstNode) {
-        int count = 0;
         if (bstNode == null) {
-            if (count > 0) {
-                System.out.println("null");
-                count++;
-            }
             System.out.println("null");
             return;
         }
