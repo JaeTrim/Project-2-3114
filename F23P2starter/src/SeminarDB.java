@@ -48,7 +48,7 @@ public class SeminarDB {
         KVPair<String, Seminar> datePair = new KVPair<String, Seminar>(sem
             .date(), sem);
 
-        if (idTree.findValue(sem.id()) == null) {
+        if (idTree.find(sem.id()) == null) {
             if (sem.x() < 0 || sem.y() < 0 || sem.x() >= 128 || sem
                 .y() >= 128) {
                 System.out.println("Insert FAILED - Bad x, y coordinates: "
@@ -86,7 +86,7 @@ public class SeminarDB {
     public void searchID(int id) {
         if (idTree.findValue(id) != null) {
             System.out.println("Found record with ID " + id + ":");
-            Seminar sem = (Seminar)idTree.findValue(id);
+            Seminar sem = (Seminar)idTree.find(id).value();
             System.out.println(sem.toString());
         }
         else {
@@ -173,12 +173,27 @@ public class SeminarDB {
      *            of record
      */
     public void delete(int id) {
-        if (idTree.findValue(id) != null) {
+        if (idTree.find(id) != null) {
+            Seminar curr = (Seminar)idTree.find(id).value();
             idTree.remove(id);
+            costTree.remove(curr.cost());
+            for (int i = 0; i < curr.keywords().length; i++) {
+//                BSTNode<KVPair<String, Seminar>> currNode =  keywordTree.findValue(curr.keywords()[i]);
+//                while ((!currNode.value().value().equals(curr))) {
+//                    currNode = currNode.left();
+//                }
+                System.out.println("\n" + keywordTree.find(curr.keywords()[i]));
+                keywordTree.remove(curr.keywords()[i]);
+                
+            }
+            dateTree.remove(curr.date());
             System.out.println("Record with ID " + id
                 + " successfully deleted from the database");
         }
-
+        else {
+            System.out.println("Delete FAILED -- There is no record with ID "
+                + id);
+        }
     }
 
 
