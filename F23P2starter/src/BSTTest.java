@@ -22,54 +22,52 @@ public class BSTTest extends TestCase {
     }
     
     public void testInsert() {
-        assertEquals("Five", bst.findValue(5));
-        assertEquals("Three", bst.findValue(3));
-        assertEquals("Seven", bst.findValue(7));
-        assertEquals("Two", bst.findValue(2));
-        assertEquals("Four", bst.findValue(4));
+        assertEquals(5, bst.size());
+        assertEquals("Five", bst.find(5).value());
+        assertEquals("Two", bst.find(2).value());
+        assertEquals("Seven", bst.find(7).value());
     }
     
     public void testFind() {
         assertEquals("Five", bst.find(5).value());
         assertEquals("Three", bst.find(3).value());
-        assertNull(bst.find(6));
+        assertNull(bst.find(8)); // Key not present in the BST
     }
     
     public void testRemove() {
-        assertEquals("Five", bst.remove(5).value());
+        assertNotNull(bst.find(5));
+        bst.remove(5, "Five");
         assertNull(bst.find(5));
-        assertNull(bst.remove(5));
-        assertEquals("Seven", bst.remove(7).value());
-        assertNull(bst.find(7));
-    }
-    
-    public void testSize() {
-        assertEquals(5, bst.size());
-        bst.remove(5);
         assertEquals(4, bst.size());
+        
+        assertNotNull(bst.find(3));
+        bst.remove(3, "Three");
+        assertNull(bst.find(3));
+        assertEquals(3, bst.size());
+        
+        assertNull(bst.remove(8, "Eight")); // Removing a non-existent key
+        assertEquals(3, bst.size()); // Size remains the same
     }
     
-    public void testClear() {
-        bst.clear();
-        assertNull(bst.getRoot());
-        assertEquals(0, bst.size());
+    public void testRangeSearch() {
+        SearchResult result = new SearchResult();
+        bst.rangeSearch(bst.getRoot(), 2, 4, result);
+        assertEquals("Two\nThree\nFour\n", result.getOutput());
+        assertEquals(7, result.getNodesVisited());
     }
     
-    public void testPrint() {
-        // Redirect console output to check printed keys
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        bst.print();
-
-        String expectedOutput = "null\n7\nnull\n5\nnull\n4\nnull\n3\nnull\n2\nnull\n";
-        assertEquals(expectedOutput, outContent.toString());
+    public void testFindValue() {
+        assertEquals("Five", bst.findValue(5, "Five").value().value());
+        assertNull(bst.findValue(5, "WrongValue")); // Value mismatch
+        assertNull(bst.findValue(8, "Eight")); // Key not present in the BST
     }
     
+//    public void testRemoveSpecific() {
+//        assertNotNull(bst.find(5));
+//        bst.remove(5, "Five");
+//        assertNull(bst.find(5));
+//        assertEquals(4, bst.size());
+//    }
+//    
     
-    
-    
-    
-    
-
 }

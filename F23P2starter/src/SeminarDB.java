@@ -84,7 +84,7 @@ public class SeminarDB {
      *            is the id of record
      */
     public void searchID(int id) {
-        if (idTree.findValue(id) != null) {
+        if (idTree.find(id) != null) {
             System.out.println("Found record with ID " + id + ":");
             Seminar sem = (Seminar)idTree.find(id).value();
             System.out.println(sem.toString());
@@ -175,18 +175,15 @@ public class SeminarDB {
     public void delete(int id) {
         if (idTree.find(id) != null) {
             Seminar curr = (Seminar)idTree.find(id).value();
-            idTree.remove(id);
-            costTree.remove(curr.cost());
+            idTree.remove(id, curr);
+            costTree.remove(curr.cost(), curr);
             for (int i = 0; i < curr.keywords().length; i++) {
-//                BSTNode<KVPair<String, Seminar>> currNode =  keywordTree.findValue(curr.keywords()[i]);
-//                while ((!currNode.value().value().equals(curr))) {
-//                    currNode = currNode.left();
-//                }
-                System.out.println("\n" + keywordTree.find(curr.keywords()[i]));
-                keywordTree.remove(curr.keywords()[i]);
+                //System.out.println("\n" + curr.keywords()[i] + keywordTree.findValue(curr.keywords()[i], curr).value().value());
+               // keywordTree.remove(curr.keywords()[i]);
+                keywordTree.remove(curr.keywords()[i], curr);
                 
             }
-            dateTree.remove(curr.date());
+            dateTree.remove(curr.date(), curr);
             System.out.println("Record with ID " + id
                 + " successfully deleted from the database");
         }

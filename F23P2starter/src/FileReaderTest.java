@@ -160,6 +160,7 @@ public class FileReaderTest extends TestCase{
             + "Keywords: high_performance_computing, grids, VT, computer, science\r\n"
             + "8 nodes visited in this search\r\n"
             + "Record with ID 1 successfully deleted from the database\r\n"
+            + "Delete FAILED -- There is no record with ID 1\r\n"
             + "ID Tree:\r\n"
             + "null\r\n"
             + "10\r\n"
@@ -168,7 +169,8 @@ public class FileReaderTest extends TestCase{
             + "null\r\n"
             + "2\r\n"
             + "null\r\n"
-            + "Number of records: 3";
+            + "Number of records: 3\r\n"
+            + "";
         assertFuzzyEquals(systemOut().getHistory(), output);
     }
 
