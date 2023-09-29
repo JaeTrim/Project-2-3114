@@ -91,15 +91,8 @@ public class BST<K extends Comparable<K>, E> {
         }
         return temp;
     }
-        
-//    public void removeSpecific(K key, E value) {        
-//        if (findValue(key, value) != null) {
-//            removeSpecificHelp(findValue(key, value));
-//            nodeCount--;
-//         } 
-//    }
 
-    public KVPair<K, E> findHelp(BSTNode<KVPair<K, E>> rt, K key) {
+    private KVPair<K, E> findHelp(BSTNode<KVPair<K, E>> rt, K key) {
         if (rt == null) {
             return null;
         }
@@ -160,27 +153,6 @@ public class BST<K extends Comparable<K>, E> {
         }
         return rt;
     }
-    
-//    private BSTNode<KVPair<K, E>> removeSpecificHelp(BSTNode<KVPair<K, E>> rt) {
-//        if (rt == null) {
-//            return null;
-//        }
-//        else {
-//            if (rt.left() == null) {
-//                return rt.right();
-//            }
-//            else if (rt.right() == null) {
-//                return rt.left();
-//            }
-//            else {
-//                BSTNode<KVPair<K, E>> temp = getmax(rt.left());
-//                rt.setValue(temp.value());
-//                rt.setLeft(deletemax(rt.left()));
-//            }
-//        }
-//        return rt;
-//    }
-
 
     private BSTNode<KVPair<K, E>> getmax(BSTNode<KVPair<K, E>> rt) {
         if (rt.right() == null)
