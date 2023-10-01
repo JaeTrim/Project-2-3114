@@ -1,33 +1,10 @@
 
-public class LeafNode<E extends Comparable<? super E>> {
+public interface LeafNode {
+   
     
-    private int level;
-    private E val;
+    public boolean leafIsFull();
     
-    public LeafNode()
-    {
-        
-    }
+    public void leafSetLevel(int lev);
     
-    public boolean isFull()
-    {
-        if (val != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    public void setLevel(int lev)
-    {
-        level = lev;
-    }
-    
-    public int getLevel()
-    {
-        return level;
-    }
+    public int leafGetLevel();
 }

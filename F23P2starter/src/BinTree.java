@@ -4,18 +4,14 @@
  */
 public class BinTree<E extends Comparable<? super E>> {
     
-    private FlyweightNode flyNode;
-    //private E root;
+    //private FlyweightNode flyNode;
     private int worldSize;
-    
+    private BinNode root;
+
     // tree will always be two dimensions for x and y coords
     final int dimensions = 2;
     
-    private LeafNode leaf;
-    private E Root;
-    
-
-    public BinTree<>(int size) {
+    public BinTree(int size) {
         worldSize = size;
         
     }
