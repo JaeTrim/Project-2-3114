@@ -5,7 +5,6 @@ public class FlyweightNode {
         return new LeafNode();
     }
 
-
     public void print() {
         System.out.println("E");
     }
