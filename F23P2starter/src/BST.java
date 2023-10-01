@@ -1,4 +1,7 @@
 
+/**
+ * BinTree Class
+ */
 public class BST<K extends Comparable<K>, E> {
 
     private BSTNode<KVPair<K, E>> root;
