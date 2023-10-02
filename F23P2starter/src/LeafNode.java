@@ -4,12 +4,10 @@
 public class LeafNode implements BinNode {
 
     private int level;
-    private BinNode left;
-    private BinNode right;
     private Seminar val;
 
     public boolean isEmpty() {
-        if (val != null) {
+        if (val == null) {
             return true;
         }
         else {
@@ -30,12 +28,12 @@ public class LeafNode implements BinNode {
 
 
     public BinNode left() {
-        return left;
+        return null;
     }
 
 
     public BinNode right() {
-        return right;
+        return null;
     }
 
 
@@ -45,20 +43,68 @@ public class LeafNode implements BinNode {
 
 
     public void setLeft(BinNode left) {
-        this.left = left;
-
     }
 
 
     public void setRight(BinNode right) {
-        this.right = right;
-
     }
 
 
     public void setValue(Seminar sem) {
         val = sem;
 
+    }
+
+
+    public BinNode insert(Seminar sem, int decision) {
+        int x = sem.x();
+        int y = sem.y();
+        if (isEmpty()) {
+            val = sem;
+            return this;
+        }
+        else {
+            InternalNode internal = new InternalNode();
+            if (decision == 0) {
+                if (val.x() > x) {
+                    // ccurr goes into leaf node right
+                    LeafNode curr = new LeafNode();
+                    curr.setValue(val);
+                    internal.setRight(curr);
+                    LeafNode curr2 = new LeafNode();
+                    curr2.setValue(sem);
+                    internal.setLeft(curr);
+                }
+                else {
+                    LeafNode curr = new LeafNode();
+                    curr.setValue(sem);
+                    internal.setRight(curr);
+                    LeafNode curr2 = new LeafNode();
+                    curr2.setValue(val);
+                    internal.setLeft(curr);
+                }
+            }
+            else {
+                if (val.y() > y) {
+                    // ccurr goes into leaf node right
+                    LeafNode curr = new LeafNode();
+                    curr.setValue(val);
+                    internal.setRight(curr);
+                    LeafNode curr2 = new LeafNode();
+                    curr2.setValue(sem);
+                    internal.setLeft(curr);
+                }
+                else {
+                    LeafNode curr = new LeafNode();
+                    curr.setValue(sem);
+                    internal.setRight(curr);
+                    LeafNode curr2 = new LeafNode();
+                    curr2.setValue(val);
+                    internal.setLeft(curr);
+                }
+            }
+            return internal;  
+        }
     }
 
 }

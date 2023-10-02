@@ -18,4 +18,6 @@ public interface BinNode {
     
     public void setValue(Seminar sem);
     
+    public BinNode insert(Seminar node, int decision);
+    
 }
