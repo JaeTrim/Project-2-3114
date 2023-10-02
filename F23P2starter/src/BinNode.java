@@ -6,18 +6,6 @@ public interface BinNode {
     
     public int getLevel();
     
-    public BinNode left();
-    
-    public void setLeft(BinNode left);
-    
-    public BinNode right();
-    
-    public void setRight(BinNode right);
-    
-    public Seminar value();
-    
-    public void setValue(Seminar sem);
-    
     public BinNode insert(Seminar node, int decision);
     
 }

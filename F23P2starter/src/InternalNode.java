@@ -1,36 +1,12 @@
 
 public class InternalNode implements BinNode {
 
-    private Seminar val;
     private BinNode left;
     private BinNode right;
     private int level;
 
     public InternalNode() {
         left = right = null;
-    }
-
-
-    public InternalNode(Seminar val) {
-        left = right = null;
-        this.val = val;
-    }
-
-
-    public InternalNode(Seminar val, BinNode l, BinNode r) {
-        left = l;
-        right = r;
-        this.val = val;
-    }
-
-
-    public Seminar value() {
-        return val;
-    }
-
-
-    public void setValue(Seminar sem) {
-        val = sem;
     }
 
 
@@ -54,19 +30,23 @@ public class InternalNode implements BinNode {
     }
 
 
-    public boolean isLeaf() {
-        return (left == null) && (right == null);
-    }
-
-
     public void setLevel(int lev) {
         level = lev;
-
     }
 
 
     public int getLevel() {
         return level;
+    }
+
+
+    public BinNode insert(Seminar sem, int decision) {
+        if (decision == 0) {
+            return right.insert(sem, decision);
+        }
+        else {
+            return left.insert(sem, decision);
+        }
     }
 
 }
