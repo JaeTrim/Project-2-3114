@@ -25,5 +25,19 @@ public class BinTree {
     public int splitDecision(int level) {
         return level % dimensions;
     }
+    
+    public void insert(Seminar sem)
+    {
+        if (root == flyweightNode)
+        {
+            LeafNode leaf = new LeafNode();
+            leaf.insert(sem, splitDecision(leaf.getLevel()));
+            root = leaf;
+        }
+        else
+        {
+            root.insert(sem, root.getLevel());
+        }
+    }
 
 }
