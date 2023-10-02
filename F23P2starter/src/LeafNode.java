@@ -72,7 +72,7 @@ public class LeafNode implements BinNode {
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
                     curr2.setValue(sem);
-                    internal.setLeft(curr);
+                    internal.setLeft(curr2);
                 }
                 else {
                     LeafNode curr = new LeafNode();
@@ -80,8 +80,9 @@ public class LeafNode implements BinNode {
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
                     curr2.setValue(val);
-                    internal.setLeft(curr);
+                    internal.setLeft(curr2);
                 }
+                
             }
             else {
                 if (val.y() > y) {
@@ -90,7 +91,7 @@ public class LeafNode implements BinNode {
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
                     curr2.setValue(sem);
-                    internal.setLeft(curr);
+                    internal.setLeft(curr2);
                 }
                 else {
                     LeafNode curr = new LeafNode();
@@ -98,7 +99,7 @@ public class LeafNode implements BinNode {
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
                     curr2.setValue(val);
-                    internal.setLeft(curr);
+                    internal.setLeft(curr2);
                 }
             }
             return internal;  

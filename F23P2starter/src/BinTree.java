@@ -36,7 +36,7 @@ public class BinTree {
         }
         else
         {
-            root.insert(sem, root.getLevel());
+            root = root.insert(sem, root.getLevel());
         }
     }
 
