@@ -67,7 +67,6 @@ public class LeafNode implements BinNode {
             InternalNode internal = new InternalNode();
             if (decision == 0) {
                 if (val.x() > x) {
-                    // ccurr goes into leaf node right
                     LeafNode curr = new LeafNode();
                     curr.setValue(val);
                     internal.setRight(curr);
@@ -86,7 +85,6 @@ public class LeafNode implements BinNode {
             }
             else {
                 if (val.y() > y) {
-                    // ccurr goes into leaf node right
                     LeafNode curr = new LeafNode();
                     curr.setValue(val);
                     internal.setRight(curr);
