@@ -1,32 +1,21 @@
-/**
- * 
- */
-public class BinNode implements LeafNode, InternalNode {
+
+public interface BinNode {
+   
     
-    private int level;
-    private Seminar val;
-
-    @Override
-    public boolean leafIsFull() {
-        if (val != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    @Override
-    public void leafSetLevel(int lev) {
-        level = lev;
-        
-    }
-
-    @Override
-    public int leafGetLevel() {
-        return level;
-    }
-
+    public void setLevel(int lev);
+    
+    public int getLevel();
+    
+    public BinNode left();
+    
+    public void setLeft(BinNode left);
+    
+    public BinNode right();
+    
+    public void setRight(BinNode right);
+    
+    public Seminar value();
+    
+    public void setValue(Seminar sem);
+    
 }
