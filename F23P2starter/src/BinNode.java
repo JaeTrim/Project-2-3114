@@ -8,4 +8,6 @@ public interface BinNode {
     
     public BinNode insert(Seminar node, int decision);
     
+    public void print();
+    
 }

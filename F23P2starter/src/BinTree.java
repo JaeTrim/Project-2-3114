@@ -31,12 +31,23 @@ public class BinTree {
         if (root == flyweightNode)
         {
             LeafNode leaf = new LeafNode();
+            leaf.setLevel(0);
             leaf.insert(sem, splitDecision(leaf.getLevel()));
             root = leaf;
         }
         else
         {
             root = root.insert(sem, root.getLevel());
+        }
+    }
+    
+    
+    public void print() {
+        if (root == flyweightNode) {
+            System.out.println("E");
+        }
+        else {
+            root.print();
         }
     }
 

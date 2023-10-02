@@ -13,7 +13,6 @@ public class SeminarDB {
     private BST<String, Seminar> dateTree;
     private BST<String, Seminar> keywordTree;
     private BinTree location;
-    private int size;
 
     // create binary search trees for various search commands
 
@@ -30,7 +29,6 @@ public class SeminarDB {
         costTree = new BST<Integer, Seminar>();
         dateTree = new BST<String, Seminar>();
         keywordTree = new BST<String, Seminar>();
-        this.size = size;
         location = new BinTree(size);
     }
 
@@ -49,6 +47,7 @@ public class SeminarDB {
             .cost(), sem);
         KVPair<String, Seminar> datePair = new KVPair<String, Seminar>(sem
             .date(), sem);
+
 
         if (idTree.find(sem.id()) == null) {
             if (sem.x() < 0 || sem.y() < 0 || sem.x() >= 128 || sem
@@ -251,7 +250,10 @@ public class SeminarDB {
                 dateTree.print();
                 System.out.println("Number of records: " + dateTree.size());
             }
-
+        }
+        if (command.equals("location")) {
+            System.out.println("Location Tree: ");
+            location.print();
         }
     }
 }

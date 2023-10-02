@@ -4,10 +4,14 @@
 public class LeafNode implements BinNode {
 
     private int level;
-    private Seminar val;
-
+    private DLList<Seminar> seminars;
+    
+    public LeafNode() {
+        seminars = new DLList<Seminar>();
+    }
+   
     public boolean isEmpty() {
-        if (val == null) {
+        if (seminars.size() == 0) {
             return true;
         }
         else {
@@ -37,8 +41,8 @@ public class LeafNode implements BinNode {
     }
 
 
-    public Seminar value() {
-        return val;
+    public DLList<Seminar> value() {
+        return seminars;
     }
 
 
@@ -51,7 +55,8 @@ public class LeafNode implements BinNode {
 
 
     public void setValue(Seminar sem) {
-        val = sem;
+        seminars.add(sem);
+        ;
 
     }
 
@@ -60,49 +65,69 @@ public class LeafNode implements BinNode {
         int x = sem.x();
         int y = sem.y();
         if (isEmpty()) {
-            val = sem;
+            seminars.add(sem);
+            return this;
+        }
+        else if (seminars.get(0).x() == x && seminars.get(0).y() == y) {
+            seminars.add(sem);
             return this;
         }
         else {
             InternalNode internal = new InternalNode();
+            internal.setLevel(level);
             if (decision == 0) {
-                if (val.x() > x) {
+                if (seminars.get(0).x() > x) {
                     LeafNode curr = new LeafNode();
-                    curr.setValue(val);
+                    curr.setLevel(level + 1);
+                    curr.setValue(seminars.get(0));
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
+                    curr2.setLevel(level + 1);
                     curr2.setValue(sem);
-                    internal.setLeft(curr2);
+                    internal.setLeft(curr);
                 }
                 else {
                     LeafNode curr = new LeafNode();
+                    curr.setLevel(level + 1);
                     curr.setValue(sem);
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
-                    curr2.setValue(val);
-                    internal.setLeft(curr2);
+                    curr2.setLevel(level + 1);
+                    curr2.setValue(seminars.get(0));
+                    internal.setLeft(curr);
                 }
-                
             }
             else {
-                if (val.y() > y) {
+                if (seminars.get(0).y() > y) {
                     LeafNode curr = new LeafNode();
-                    curr.setValue(val);
+                    curr.setLevel(level + 1);
+                    curr.setValue(seminars.get(0));
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
+                    curr2.setLevel(level + 1);
                     curr2.setValue(sem);
-                    internal.setLeft(curr2);
+                    internal.setLeft(curr);
                 }
                 else {
                     LeafNode curr = new LeafNode();
+                    curr.setLevel(level + 1);
                     curr.setValue(sem);
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
-                    curr2.setValue(val);
-                    internal.setLeft(curr2);
+                    curr2.setLevel(level + 1);
+                    curr2.setValue(seminars.get(0));
+                    internal.setLeft(curr);
                 }
             }
-            return internal;  
+            return internal;
+        }
+    }
+
+
+    public void print() {
+        for (int i = 0; i < seminars.size(); i++) {
+            System.out.println("Leaf with " + seminars.size() + " objects: "
+                + seminars.get(i).id());
         }
     }
 
