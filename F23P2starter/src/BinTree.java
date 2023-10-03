@@ -4,7 +4,7 @@
  */
 public class BinTree {
 
-    private static BinNode flyweightNode;
+    private BinNode flyweightNode;
 
     // private FlyweightNode flyNode;
     private int worldSize;
@@ -36,12 +36,12 @@ public class BinTree {
             leaf.setYStart(0);
             leaf.setXEnd(worldSize - 1);
             leaf.setYEnd(worldSize - 1);
-            leaf.insert(sem, splitDecision(leaf.getLevel()));
+            leaf.insert(sem, flyweightNode);
             root = leaf;
         }
         else
         {
-            root = root.insert(sem, root.getLevel());
+            root = root.insert(sem, flyweightNode);
         }
     }
     

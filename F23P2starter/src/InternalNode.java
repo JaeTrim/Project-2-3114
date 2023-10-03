@@ -44,39 +44,128 @@ public class InternalNode implements BinNode {
     public int getLevel() {
         return level;
     }
-    
-    
 
-
-    public BinNode insert(Seminar sem, int decision) {
-        
+    public BinNode insert(Seminar sem, BinNode flyNode) {
+        int decision = level % 2;
         
         if (decision == 0) {
             if (sem.x() > xEnd)
             {
-                setRight(right.insert(sem, decision));       
+                setRight(right.insert(sem, flyNode));       
                 return this;
             }
             else
             {
-                
+                if ((sem.x() > (xStart + (xEnd - xStart)/ 2)))
+                {
+                    if (right == flyNode)
+                    {
+                        LeafNode leaf = new LeafNode();
+                        leaf.setLevel(level + 1);
+                        leaf.setXEnd(xEnd);
+                        leaf.setXStart((xStart - xEnd)/ 2);
+                        leaf.setYStart(yStart);
+                        leaf.setYEnd(yEnd);
+                        leaf.insert(sem, flyNode);
+                        return this;
+                    }
+                    else
+                    {
+                        setRight(right.insert(sem, flyNode));       
+                        return this;
+                    }
+                    
+                }
+                else
+                {
+                    if (left == flyNode)
+                    {
+                        LeafNode leaf = new LeafNode();
+                        leaf.setLevel(level + 1);
+                        leaf.setXEnd(xEnd);
+                        leaf.setXStart((xStart - xEnd)/ 2);
+                        leaf.setYStart(yStart);
+                        leaf.setYEnd(yEnd);
+                        leaf.insert(sem, flyNode);
+                        return this;
+                    }
+                    else
+                    {
+                        setLeft(left.insert(sem, flyNode));       
+                        return this;
+                    }
+                }
             }
         }
         else {
-            setLeft(left.insert(sem, decision));
-            return this;
+            if (sem.y() > xEnd)
+            {
+                setRight(right.insert(sem, flyNode));       
+                return this;
+            }
+            else
+            {
+                if ((sem.y() > (yStart + (yEnd - yStart)/ 2)))
+                {
+                    if (right == flyNode)
+                    {
+                        LeafNode leaf = new LeafNode();
+                        leaf.setLevel(level + 1);
+                        leaf.setXEnd(xEnd);
+                        leaf.setXStart(xStart);
+                        leaf.setYStart((yStart - yEnd)/ 2);
+                        leaf.setYEnd(yEnd);
+                        leaf.insert(sem, flyNode);
+                        return this;
+                    }
+                    else
+                    {
+                        setRight(right.insert(sem, flyNode));       
+                        return this;
+                    }
+                    
+                }
+                else
+                {
+                    if (left == flyNode)
+                    {
+                        LeafNode leaf = new LeafNode();
+                        leaf.setLevel(level + 1);
+                        leaf.setXEnd(xEnd);
+                        leaf.setXStart(xStart);
+                        leaf.setYStart((yStart - yEnd)/ 2);
+                        leaf.setYEnd(yEnd);
+                        leaf.insert(sem, flyNode);
+                        return this;
+                    }
+                    else
+                    {
+                        setLeft(left.insert(sem, flyNode));       
+                        return this;
+                    }
+                }
+            }
         }
     }
 
 
     public void print() {
+        System.out.println("I");
         if (left != null) {
-            //System.out.println("I");
+         
             left.print();
         }
+        else
+        {
+            System.out.println("E");
+        }
         if (right != null) {
-            //System.out.println("I");
+            
             right.print();
+        }
+        else
+        {
+            System.out.println("E");
         }
     }
     
