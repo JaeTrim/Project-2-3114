@@ -4,14 +4,18 @@
 public class LeafNode implements BinNode {
 
     private int level;
-    private DLList<Seminar> seminars;
+    private int xStart;
+    private int xEnd;
+    private int yStart;
+    private int yEnd;
+    private Seminar seminar;
     
     public LeafNode() {
-        seminars = new DLList<Seminar>();
+        seminar = null;
     }
    
     public boolean isEmpty() {
-        if (seminars.size() == 0) {
+        if (seminar == null) {
             return true;
         }
         else {
@@ -41,8 +45,8 @@ public class LeafNode implements BinNode {
     }
 
 
-    public DLList<Seminar> value() {
-        return seminars;
+    public Seminar value() {
+        return seminar;
     }
 
 
@@ -55,8 +59,8 @@ public class LeafNode implements BinNode {
 
 
     public void setValue(Seminar sem) {
-        seminars.add(sem);
-        ;
+        seminar = sem;
+        
 
     }
 
@@ -64,27 +68,28 @@ public class LeafNode implements BinNode {
     public BinNode insert(Seminar sem, int decision) {
         int x = sem.x();
         int y = sem.y();
+        //int id = sem.id();
         if (isEmpty()) {
-            seminars.add(sem);
+            setValue(sem);
             return this;
         }
-        else if (seminars.get(0).x() == x && seminars.get(0).y() == y) {
-            seminars.add(sem);
-            return this;
-        }
+//        else if (seminar.x() == x && seminar.y() == y && seminar.id() == id) {
+//            setValue(sem);
+//            return this;
+//        }
         else {
             InternalNode internal = new InternalNode();
             internal.setLevel(level);
             if (decision == 0) {
-                if (seminars.get(0).x() > x) {
+                if (seminar.x() > x) {
                     LeafNode curr = new LeafNode();
                     curr.setLevel(level + 1);
-                    curr.setValue(seminars.get(0));
+                    curr.setValue(seminar);
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
                     curr2.setLevel(level + 1);
                     curr2.setValue(sem);
-                    internal.setLeft(curr);
+                    internal.setLeft(curr2);
                 }
                 else {
                     LeafNode curr = new LeafNode();
@@ -93,20 +98,20 @@ public class LeafNode implements BinNode {
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
                     curr2.setLevel(level + 1);
-                    curr2.setValue(seminars.get(0));
-                    internal.setLeft(curr);
+                    curr2.setValue(seminar);
+                    internal.setLeft(curr2);
                 }
             }
             else {
-                if (seminars.get(0).y() > y) {
+                if (seminar.y() > y) {
                     LeafNode curr = new LeafNode();
                     curr.setLevel(level + 1);
-                    curr.setValue(seminars.get(0));
+                    curr.setValue(seminar);
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
                     curr2.setLevel(level + 1);
                     curr2.setValue(sem);
-                    internal.setLeft(curr);
+                    internal.setLeft(curr2);
                 }
                 else {
                     LeafNode curr = new LeafNode();
@@ -115,8 +120,8 @@ public class LeafNode implements BinNode {
                     internal.setRight(curr);
                     LeafNode curr2 = new LeafNode();
                     curr2.setLevel(level + 1);
-                    curr2.setValue(seminars.get(0));
-                    internal.setLeft(curr);
+                    curr2.setValue(seminar);
+                    internal.setLeft(curr2);
                 }
             }
             return internal;
@@ -125,10 +130,54 @@ public class LeafNode implements BinNode {
 
 
     public void print() {
-        for (int i = 0; i < seminars.size(); i++) {
-            System.out.println("Leaf with " + seminars.size() + " objects: "
-                + seminars.get(i).id());
-        }
+//        for (int i = 0; i < level; i++)
+//        {
+//            System.out.println("I");
+//        }
+//        for (int i = 0; i < seminars.size(); i++) {
+//            System.out.println("Leaf with " + seminars.size() + " objects: "
+//                + seminars.get(i).id());
+//        }
+    }
+    
+    public void setXStart(int x_coord)
+    {
+        xStart = x_coord;
+    }
+    
+    public int getXStart()
+    {
+        return xStart;
+    }
+    
+    public void setXEnd(int x_coord)
+    {
+        xEnd = x_coord;
+    }
+    
+    public int getXEnd()
+    {
+        return xEnd;
+    }
+    
+    public void setYStart(int y_coord)
+    {
+        yStart = y_coord;
+    }
+    
+    public int getYStart()
+    {
+        return yStart;
+    }
+    
+    public void setYEnd(int y_coord)
+    {
+        yEnd = y_coord;
+    }
+    
+    public int getYEnd()
+    {
+        return yEnd;
     }
 
 }

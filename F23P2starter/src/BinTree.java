@@ -32,6 +32,10 @@ public class BinTree {
         {
             LeafNode leaf = new LeafNode();
             leaf.setLevel(0);
+            leaf.setXStart(0);
+            leaf.setYStart(0);
+            leaf.setXEnd(worldSize - 1);
+            leaf.setYEnd(worldSize - 1);
             leaf.insert(sem, splitDecision(leaf.getLevel()));
             root = leaf;
         }
