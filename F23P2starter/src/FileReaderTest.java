@@ -1,10 +1,10 @@
 import student.TestCase;
 
 /**
- * Test class for FileReader 
+ * Test class for FileReader
  */
-public class FileReaderTest extends TestCase{
-    
+public class FileReaderTest extends TestCase {
+
     /*
      * SetUp Constructor
      */
@@ -13,12 +13,13 @@ public class FileReaderTest extends TestCase{
         String file = "P2Sample_input.txt";
         new FileReader(worldSize, file);
     }
-    
+
+
     /**
      * Tests the insert method
      */
     public void testInsert() throws Exception {
-        String output = "ID Tree:\r\n"
+        String output = "Location Tree:\r\n" + "E\r\n" + "ID Tree:\r\n"
             + "This tree is empty\r\n"
             + "Search FAILED -- There is no record with ID 1\r\n"
             + "Seminars matching keyword VT:\r\n"
@@ -43,79 +44,30 @@ public class FileReaderTest extends TestCase{
             + "ID: 3, Title: Overview of HPC and CSE Research at VT\r\n"
             + "Date: 1203301125, Length: 35, X: 0, Y: 0, Cost: 25\r\n"
             + "Description: Learn what kind of    research is done on HPC  and CSE at VT\r\n"
-            + "Keywords: HPC, CSE, computer_science\r\n"
-            + "ID Tree:\r\n"
-            + "null\r\n"
-            + "10\r\n"
-            + "null\r\n"
-            + "3\r\n"
-            + "null\r\n"
-            + "2\r\n"
-            + "null\r\n"
-            + "1\r\n"
-            + "null\r\n"
-            + "Number of records: 4\r\n"
-            + "Date Tree:\r\n"
-            + "null\r\n"
-            + "1203301125\r\n"
-            + "null\r\n"
-            + "0701250830\r\n"
-            + "null\r\n"
-            + "0610071600\r\n"
-            + "null\r\n"
-            + "0610051600\r\n"
-            + "null\r\n"
-            + "Number of records: 4\r\n"
-            + "Keyword Tree:\r\n"
-            + "null\r\n"
-            + "science\r\n"
-            + "null\r\n"
-            + "high_performance_computing\r\n"
-            + "null\r\n"
-            + "grids\r\n"
-            + "null\r\n"
-            + "computer_science\r\n"
-            + "null\r\n"
-            + "computer\r\n"
-            + "null\r\n"
-            + "computation_biology\r\n"
-            + "null\r\n"
-            + "Virginia_Tech\r\n"
-            + "null\r\n"
-            + "Virginia_Tech\r\n"
-            + "null\r\n"
-            + "VT\r\n"
-            + "null\r\n"
-            + "VT\r\n"
-            + "null\r\n"
-            + "VT\r\n"
-            + "null\r\n"
-            + "HPC\r\n"
-            + "null\r\n"
-            + "HCI\r\n"
-            + "null\r\n"
-            + "Computer_Science\r\n"
-            + "null\r\n"
-            + "Computer_Science\r\n"
-            + "null\r\n"
-            + "CSE\r\n"
-            + "null\r\n"
-            + "Biology\r\n"
-            + "null\r\n"
-            + "Bioinformatics\r\n"
-            + "null\r\n"
-            + "Number of records: 18\r\n"
-            + "Cost Tree:\r\n"
-            + "null\r\n"
-            + "45\r\n"
-            + "null\r\n"
-            + "30\r\n"
-            + "null\r\n"
-            + "25\r\n"
-            + "null\r\n"
-            + "17\r\n"
-            + "null\r\n"
-            + "Number of records: 4\r\n"
+            + "Keywords: HPC, CSE, computer_science\r\n" + "ID Tree:\r\n"
+            + "null\r\n" + "10\r\n" + "null\r\n" + "3\r\n" + "null\r\n"
+            + "2\r\n" + "null\r\n" + "1\r\n" + "null\r\n"
+            + "Number of records: 4\r\n" + "Date Tree:\r\n" + "null\r\n"
+            + "1203301125\r\n" + "null\r\n" + "0701250830\r\n" + "null\r\n"
+            + "0610071600\r\n" + "null\r\n" + "0610051600\r\n" + "null\r\n"
+            + "Number of records: 4\r\n" + "Keyword Tree:\r\n" + "null\r\n"
+            + "science\r\n" + "null\r\n" + "high_performance_computing\r\n"
+            + "null\r\n" + "grids\r\n" + "null\r\n" + "computer_science\r\n"
+            + "null\r\n" + "computer\r\n" + "null\r\n"
+            + "computation_biology\r\n" + "null\r\n" + "Virginia_Tech\r\n"
+            + "null\r\n" + "Virginia_Tech\r\n" + "null\r\n" + "VT\r\n"
+            + "null\r\n" + "VT\r\n" + "null\r\n" + "VT\r\n" + "null\r\n"
+            + "HPC\r\n" + "null\r\n" + "HCI\r\n" + "null\r\n"
+            + "Computer_Science\r\n" + "null\r\n" + "Computer_Science\r\n"
+            + "null\r\n" + "CSE\r\n" + "null\r\n" + "Biology\r\n" + "null\r\n"
+            + "Bioinformatics\r\n" + "null\r\n" + "Number of records: 18\r\n"
+            + "Cost Tree:\r\n" + "null\r\n" + "45\r\n" + "null\r\n" + "30\r\n"
+            + "null\r\n" + "25\r\n" + "null\r\n" + "17\r\n" + "null\r\n"
+            + "Number of records: 4\r\n" + "Location Tree:\r\n" + "I\r\n"
+            + "I\r\n" + "I\r\n" + "I\r\n" + "I\r\n" + "I\r\n" + "I\r\n"
+            + "Leaf with 1 objects: 3\r\n" + "Leaf with 2 objects: 1 2 \r\n"
+            + "E\r\n" + "Leaf with 1 objects: 10\r\n" + "E\r\n" + "E\r\n"
+            + "E\r\n" + "E\r\n"
             + "Insert FAILED - There is already a record with ID 10\r\n"
             + "Seminars matching keyword VT:\r\n"
             + "ID: 10, Title: Computing Systems Research at VT\r\n"
@@ -158,19 +110,14 @@ public class FileReaderTest extends TestCase{
             + "Date: 0701250830, Length: 30, X: 30, Y: 10, Cost: 17\r\n"
             + "Description: Seminar about the      Computing systems research at      VT\r\n"
             + "Keywords: high_performance_computing, grids, VT, computer, science\r\n"
-            + "8 nodes visited in this search\r\n"
-            + "Record with ID 1 successfully deleted from the database\r\n"
-            + "Delete FAILED -- There is no record with ID 1\r\n"
-            + "ID Tree:\r\n"
-            + "null\r\n"
-            + "10\r\n"
-            + "null\r\n"
-            + "3\r\n"
-            + "null\r\n"
-            + "2\r\n"
-            + "null\r\n"
-            + "Number of records: 3\r\n"
-            + "";
+            + "8 nodes visited in this search\r\n" + "ID Tree:\r\n" + "null\r\n"
+            + "10\r\n" + "null\r\n" + "3\r\n" + "null\r\n" + "2\r\n"
+            + "null\r\n" + "1\r\n" + "null\r\n" + "Number of records: 4\r\n"
+            + "Location Tree:\r\n" + "I\r\n" + "I\r\n" + "I\r\n" + "I\r\n"
+            + "I\r\n" + "I\r\n" + "I\r\n" + "Leaf with 1 objects: 3\r\n"
+            + "Leaf with 2 objects: 1 2 \r\n" + "E\r\n"
+            + "Leaf with 1 objects: 10\r\n" + "E\r\n" + "E\r\n" + "E\r\n"
+            + "E\r\n" + "";
         assertFuzzyEquals(systemOut().getHistory(), output);
     }
 

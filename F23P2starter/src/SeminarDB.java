@@ -252,7 +252,7 @@ public class SeminarDB {
             }
         }
         if (command.equals("location")) {
-            System.out.println("Location Tree: ");
+            System.out.println("Location Tree:");
             location.print();
         }
     }
