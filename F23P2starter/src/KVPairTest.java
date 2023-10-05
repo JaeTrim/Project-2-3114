@@ -19,7 +19,12 @@ public class KVPairTest extends TestCase {
     }
     
     public void testToString() {
+        KVPair<Integer, String> pair2 = new KVPair<>(null, "Test");
         assertEquals("(10, Test)", pair.toString());
+        assertEquals("(null, Test)", pair2.toString());
+        KVPair<String, String> pair3 = new KVPair<>("Test", null);
+        assertEquals("(Test, null)", pair3.toString());
+        
     }
     
     public void testCompareToKVPair() {

@@ -3,11 +3,6 @@
  */
 public class LeafNode implements BinNode {
 
-    private int level;
-    private int xStart;
-    private int xEnd;
-    private int yStart;
-    private int yEnd;
     private DLList<Seminar> seminars;
 
     public LeafNode() {
@@ -23,18 +18,6 @@ public class LeafNode implements BinNode {
             return false;
         }
     }
-
-
-    public void setLevel(int lev) {
-        level = lev;
-
-    }
-
-
-    public int getLevel() {
-        return level;
-    }
-
 
     public BinNode left() {
         return null;
@@ -70,156 +53,71 @@ public class LeafNode implements BinNode {
     }
 
 
-    public BinNode insert(Seminar sem, BinNode flyNode) {
+    public BinNode insert(Seminar sem, BinNode flyNode, int x, int y, int xEnd, int yEnd, int level) {
         int decision = level % 2;
-        int x = sem.x();
-        int y = sem.y();
-        if (isEmpty()) {
+        int newX = sem.x();
+        int newY = sem.y();
+        if (this == flyNode) {
+            LeafNode leaf = new LeafNode();
+            return leaf.insert(sem, flyNode, x, y, xEnd, yEnd, level);
+        }
+        else if (this.isEmpty())
+        {
             setValue(sem);
             return this;
         }
-        else if (seminars.get(0).x() == x && seminars.get(0).y() == y) {
+        else if (seminars.get(0).x() == newX && seminars.get(0).y() == newY) {
             seminars.add(sem);
             return this;
         }
         else {
             if (decision == 0) {
-                int split = xStart + ((xEnd - xStart) / 2);
-                InternalNode internal = new InternalNode();
-                internal.setXStart(xStart);
-                internal.setXEnd(xEnd);
-                internal.setYStart(yStart);
-                internal.setYEnd(yEnd);
-                internal.setLevel(level);
-                if ((x > split) && (seminars.get(0).x() > split)) {
-                    this.setLevel(level + 1);
-                    this.setYStart(yStart);
-                    this.setYEnd(yEnd);
-                    this.setXStart(split);
-                    this.setXEnd(xEnd);
+                int split = x + ((xEnd - x) / 2);
+                InternalNode internal = new InternalNode(flyNode);
+                if (((newX > split) && (seminars.get(0).x() > split)) || ((newX <= split) && (seminars.get(0).x() <= split))) {
+                    for (int i = 0; i < seminars.size(); i++)
+                    {
+                        internal.insert(seminars.get(i), flyNode, x, y, xEnd, yEnd, level);
+                    }
+                    return internal.insert(sem, flyNode, x, y, xEnd, yEnd, level);
+                }
+                else if (seminars.get(0).x() > newX) {
                     internal.setRight(this);
-                    internal.setLeft(flyNode);
-                    return internal.insert(sem, flyNode);
-                }
-                else if (((x <= split) && (seminars.get(0).x() <= split))) {
-                    this.setLevel(level + 1);
-                    this.setYStart(yStart);
-                    this.setYEnd(yEnd);
-                    this.setXStart(xStart);
-                    this.setXEnd(split);
-                    internal.setRight(flyNode);
-                    internal.setLeft(this);
-                    return internal.insert(sem, flyNode);
-                }
-                else if (seminars.get(0).x() > x) {
-                    LeafNode curr = new LeafNode();
-                    curr.setXStart(xStart);
-                    curr.setYStart(yStart);
-                    curr.setXEnd(split);
-                    curr.setYEnd(yEnd);
-                    curr.setLevel(level + 1);
-
-                    curr.setList(seminars);
-                    internal.setRight(curr);
-                    LeafNode curr2 = new LeafNode();
-                    curr2.setXStart(xStart);
-                    curr2.setYStart(yStart);
-                    curr2.setXEnd(split);
-                    curr2.setYEnd(yEnd);
-                    curr2.setLevel(level + 1);
-                    curr2.setValue(sem);
-                    internal.setLeft(curr2);
+                    LeafNode leaf = new LeafNode();
+                    leaf.setValue(sem);
+                    internal.setLeft(leaf);
                     return internal;
                 }
                 else {
-                    LeafNode curr = new LeafNode();
-                    curr.setXStart(split);
-                    curr.setYStart(yStart);
-                    curr.setXEnd(xEnd);
-                    curr.setYEnd(yEnd);
-                    curr.setLevel(level + 1);
-                    curr.setValue(sem);
-                    internal.setRight(curr);
-                    LeafNode curr2 = new LeafNode();
-                    curr2.setXStart(xStart);
-                    curr2.setYStart(yStart);
-                    curr2.setXEnd(split);
-                    curr2.setYEnd(yEnd);
-                    curr2.setLevel(level + 1);
-                    curr2.setList(seminars);
-                    internal.setLeft(curr2);
+                    LeafNode leaf = new LeafNode();
+                    leaf.setValue(sem);
+                    internal.setRight(leaf);
+                    internal.setLeft(this);
                     return internal;
                 }
             }
             else {
-                int split = yStart + ((yEnd - yStart) / 2);
-                InternalNode internal = new InternalNode();
-                if ((y > split) && (seminars.get(0).y() > split)) {
-                    internal.setXStart(xStart);
-                    internal.setXEnd(xEnd);
-                    internal.setYStart(yStart);
-                    internal.setYEnd(yEnd);
-                    internal.setLevel(level);
-                    this.setLevel(level + 1);
-                    this.setYStart(split);
-                    this.setYEnd(yEnd);
-                    this.setXStart(xStart);
-                    this.setXEnd(xEnd);
+                int split = y + ((yEnd - y) / 2);
+                InternalNode internal = new InternalNode(flyNode);
+                if (((newY > split) && (seminars.get(0).y() > split)) || ((newY <= split) && (seminars.get(0).y() <= split))) {
+                    for (int i = 0; i < seminars.size(); i++)
+                    {
+                        internal.insert(seminars.get(i), flyNode, x, y, xEnd, yEnd, level);
+                    }
+                    return internal.insert(sem, flyNode, x, y, xEnd, yEnd, level);
+                }
+                else if (seminars.get(0).y() > newY) {
                     internal.setRight(this);
-                    internal.setLeft(flyNode);
-                    return internal.insert(sem, flyNode);
-                }
-                else if (((y <= split) && (seminars.get(0).y() <= split))) {
-                    internal.setXStart(xStart);
-                    internal.setXEnd(xEnd);
-                    internal.setYStart(yStart);
-                    internal.setYEnd(yEnd);
-                    internal.setLevel(level);
-                    this.setLevel(level + 1);
-                    this.setYStart(yStart);
-                    this.setYEnd(split);
-                    this.setXStart(xStart);
-                    this.setXEnd(xEnd);
-                    internal.setRight(flyNode);
-                    internal.setLeft(this);
-                    return internal.insert(sem, flyNode);
-                }
-                else if (seminars.get(0).y() > y) {
                     LeafNode curr = new LeafNode();
-                    curr.setXStart(xStart);
-                    curr.setYStart(yStart);
-                    curr.setXEnd(yEnd);
-                    curr.setYEnd(split);
-                    curr.setLevel(level + 1);
-                    curr.setList(seminars);
-                    internal.setRight(curr);
-                    LeafNode curr2 = new LeafNode();
-                    curr2.setXStart(xStart);
-                    curr2.setYStart(yStart);
-                    curr2.setXEnd(yEnd);
-                    curr2.setYEnd(split);
-                    curr2.setLevel(level + 1);
-                    curr2.setValue(sem);
-                    internal.setLeft(curr2);
+                    curr.setValue(sem);
+                    internal.setLeft(curr);
                     return internal;
                 }
                 else {
                     LeafNode curr = new LeafNode();
-                    curr.setXStart(xStart);
-                    curr.setYStart(split);
-                    curr.setXEnd(yEnd);
-                    curr.setYEnd(yEnd);
-                    curr.setLevel(level + 1);
                     curr.setValue(sem);
                     internal.setRight(curr);
-                    LeafNode curr2 = new LeafNode();
-                    curr2.setXStart(xStart);
-                    curr2.setYStart(yStart);
-                    curr2.setXEnd(yEnd);
-                    curr2.setYEnd(split);
-                    curr2.setLevel(level + 1);
-                    curr2.setList(seminars);
-                    internal.setLeft(curr2);
+                    internal.setLeft(this);
                     return internal;
                 }
             }
@@ -229,7 +127,7 @@ public class LeafNode implements BinNode {
 
 
     public void print() {
-        if (seminars.size() > 1) {
+        if (seminars.size() >= 1) {
             System.out.print("Leaf with " + seminars.size() + " objects: ");
             for (int j = 0; j < seminars.size(); j++) {
                 System.out.print(seminars.get(j).id() + " ");
@@ -237,51 +135,29 @@ public class LeafNode implements BinNode {
             System.out.println("");
 
         }
-        else {
-            System.out.println("Leaf with " + seminars.size() + " objects: "
-                + seminars.get(0).id());
+        else if (seminars.size() == 0)
+        {
+            System.out.println("E");
         }
-
     }
 
-
-    public void setXStart(int x_coord) {
-        xStart = x_coord;
+    
+    public BinNode delete(Seminar sem, int level, int x, int y, int xEnd, int yEnd, BinNode fly)
+    {
+        if (seminars.get(0).x() == sem.x() && seminars.get(0).y() == sem.y())
+        {
+            for (int i = 0; i < seminars.size(); i++)
+            {
+                if (seminars.get(i).id() == sem.id())
+                {
+                    seminars.remove(i);
+                }
+            }
+        }
+        if (seminars.size() == 0)
+        {
+            return fly;
+        }
+        return this;
     }
-
-
-    public int getXStart() {
-        return xStart;
-    }
-
-
-    public void setXEnd(int x_coord) {
-        xEnd = x_coord;
-    }
-
-
-    public int getXEnd() {
-        return xEnd;
-    }
-
-
-    public void setYStart(int y_coord) {
-        yStart = y_coord;
-    }
-
-
-    public int getYStart() {
-        return yStart;
-    }
-
-
-    public void setYEnd(int y_coord) {
-        yEnd = y_coord;
-    }
-
-
-    public int getYEnd() {
-        return yEnd;
-    }
-
 }

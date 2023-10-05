@@ -13,6 +13,7 @@ public class SeminarDB {
     private BST<String, Seminar> dateTree;
     private BST<String, Seminar> keywordTree;
     private BinTree location;
+    private int worldSize;
 
     // create binary search trees for various search commands
 
@@ -29,7 +30,8 @@ public class SeminarDB {
         costTree = new BST<Integer, Seminar>();
         dateTree = new BST<String, Seminar>();
         keywordTree = new BST<String, Seminar>();
-        location = new BinTree(size);
+        worldSize = size;
+        location = new BinTree(worldSize);
     }
 
 
@@ -50,8 +52,8 @@ public class SeminarDB {
 
 
         if (idTree.find(sem.id()) == null) {
-            if (sem.x() < 0 || sem.y() < 0 || sem.x() >= 128 || sem
-                .y() >= 128) {
+            if (sem.x() < 0 || sem.y() < 0 || sem.x() >= worldSize || sem
+                .y() >= worldSize) {
                 System.out.println("Insert FAILED - Bad x, y coordinates: "
                     + sem.x() + ", " + sem.y());
             }
@@ -186,6 +188,7 @@ public class SeminarDB {
                 
             }
             dateTree.remove(curr.date(), curr);
+            location.delete(curr);
             System.out.println("Record with ID " + id
                 + " successfully deleted from the database");
         }

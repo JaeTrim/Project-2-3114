@@ -58,6 +58,19 @@ public class DLListTest extends TestCase {
         assertTrue(list.remove(0));
         assertEquals(1, list.size());
     }
+    
+    public void testRemoveSize() {
+        assertEquals(list.size(), 0);
+        list.add("A");
+        assertEquals(list.size(), 1);
+        list.remove(0);
+        assertEquals(list.size(), 0);
+        list.add("A");
+        assertEquals(list.size(), 1);
+        list.remove("A");
+        assertEquals(list.size(), 0);
+        
+    }
 
 
     /**

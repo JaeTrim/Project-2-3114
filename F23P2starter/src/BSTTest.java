@@ -47,6 +47,10 @@ public class BSTTest extends TestCase {
         
         assertNull(bst.remove(8, "Eight")); // Removing a non-existent key
         assertEquals(3, bst.size()); // Size remains the same
+        
+        bst = new BST<>();
+        bst.insert(new KVPair<>(5, "Five"));
+        
     }
     
     public void testRangeSearch() {

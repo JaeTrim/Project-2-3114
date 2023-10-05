@@ -1,28 +1,10 @@
 
 public interface BinNode {
-   
-    public void setLevel(int lev);
     
-    public int getLevel();
-    
-    public BinNode insert(Seminar node, BinNode flyNode);
+    public BinNode insert(Seminar sem, BinNode flyNode, int x, int y, int xEnd, int yEnd, int level);
     
     public void print();
     
-    public void setXStart(int x_coord);
+    public BinNode delete(Seminar sem, int level, int x, int y, int xEnd, int yEnd, BinNode fly);
     
-    public int getXStart();
-    
-    public void setXEnd(int x_coord);
-    
-    public int getXEnd();
-    
-    public void setYStart(int y_coord);
-    
-    public int getYStart();
-    
-    public void setYEnd(int y_coord);
-    
-    public int getYEnd();
-        
 }

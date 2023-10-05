@@ -3,14 +3,10 @@ public class InternalNode implements BinNode {
 
     private BinNode left;
     private BinNode right;
-    private int xStart;
-    private int xEnd;
-    private int yStart;
-    private int yEnd;
-    private int level;
 
-    public InternalNode() {
-        left = right = null;
+    public InternalNode(BinNode fly) {
+        left = fly;
+        right = fly;
     }
 
 
@@ -36,114 +32,38 @@ public class InternalNode implements BinNode {
     }
 
 
-    public void setLevel(int lev) {
-        level = lev;
-    }
-
-
-    public int getLevel() {
-        return level;
-    }
-
-    public BinNode insert(Seminar sem, BinNode flyNode) {
+    public BinNode insert(
+        Seminar sem,
+        BinNode flyNode,
+        int x,
+        int y,
+        int xEnd,
+        int yEnd,
+        int level) {
         int decision = level % 2;
-        
         if (decision == 0) {
-            if (sem.x() > xEnd)
-            {
-                setRight(right.insert(sem, flyNode));       
+            if ((sem.x() > (x + (xEnd - x) / 2))) {
+                setRight(right.insert(sem, flyNode, x + ((xEnd - x) / 2), y,
+                    xEnd, yEnd, level + 1));
                 return this;
             }
-            else
-            {
-                if ((sem.x() > (xStart + (xEnd - xStart)/ 2)))
-                {
-                    if (right == flyNode)
-                    {
-                        LeafNode leaf = new LeafNode();
-                        leaf.setLevel(level + 1);
-                        leaf.setXEnd(xEnd);
-                        leaf.setXStart((xStart - xEnd)/ 2);
-                        leaf.setYStart(yStart);
-                        leaf.setYEnd(yEnd);
-                        leaf.insert(sem, flyNode);
-                        return this;
-                    }
-                    else
-                    {
-                        setRight(right.insert(sem, flyNode));       
-                        return this;
-                    }
-                    
-                }
-                else
-                {
-                    if (left == flyNode)
-                    {
-                        LeafNode leaf = new LeafNode();
-                        leaf.setLevel(level + 1);
-                        leaf.setXEnd(xEnd);
-                        leaf.setXStart((xStart - xEnd)/ 2);
-                        leaf.setYStart(yStart);
-                        leaf.setYEnd(yEnd);
-                        leaf.insert(sem, flyNode);
-                        return this;
-                    }
-                    else
-                    {
-                        setLeft(left.insert(sem, flyNode));       
-                        return this;
-                    }
-                }
+            else {
+                setLeft(left.insert(sem, flyNode, x, y, x + ((xEnd - x) / 2),
+                    yEnd, level + 1));
+                return this;
             }
         }
         else {
-            if (sem.y() > xEnd)
-            {
-                setRight(right.insert(sem, flyNode));       
+            if ((sem.y() > (y + (yEnd - y) / 2))) {
+                setRight(right.insert(sem, flyNode, x, y + ((yEnd - y) / 2),
+                    xEnd, yEnd, level + 1));
                 return this;
+
             }
-            else
-            {
-                if ((sem.y() > (yStart + (yEnd - yStart)/ 2)))
-                {
-                    if (right == flyNode)
-                    {
-                        LeafNode leaf = new LeafNode();
-                        leaf.setLevel(level + 1);
-                        leaf.setXEnd(xEnd);
-                        leaf.setXStart(xStart);
-                        leaf.setYStart((yStart - yEnd)/ 2);
-                        leaf.setYEnd(yEnd);
-                        leaf.insert(sem, flyNode);
-                        return this;
-                    }
-                    else
-                    {
-                        setRight(right.insert(sem, flyNode));       
-                        return this;
-                    }
-                    
-                }
-                else
-                {
-                    if (left == flyNode)
-                    {
-                        LeafNode leaf = new LeafNode();
-                        leaf.setLevel(level + 1);
-                        leaf.setXEnd(xEnd);
-                        leaf.setXStart(xStart);
-                        leaf.setYStart((yStart - yEnd)/ 2);
-                        leaf.setYEnd(yEnd);
-                        leaf.insert(sem, flyNode);
-                        return this;
-                    }
-                    else
-                    {
-                        setLeft(left.insert(sem, flyNode));       
-                        return this;
-                    }
-                }
+            else {
+                setLeft(left.insert(sem, flyNode, x, y, xEnd, y + (yEnd - y)
+                    / 2, level + 1));
+                return this;
             }
         }
     }
@@ -151,62 +71,90 @@ public class InternalNode implements BinNode {
 
     public void print() {
         System.out.println("I");
-        if (left != null) {
-         
-            left.print();
-        }
-        else
-        {
-            System.out.println("E");
-        }
-        if (right != null) {
-            
-            right.print();
-        }
-        else
-        {
-            System.out.println("E");
-        }
-    }
-    
-    public void setXStart(int x_coord)
-    {
-        xStart = x_coord;
-    }
-    
-    public int getXStart()
-    {
-        return xStart;
-    }
-    
-    public void setXEnd(int x_coord)
-    {
-        xEnd = x_coord;
-    }
-    
-    public int getXEnd()
-    {
-        return xEnd;
-    }
-    
-    public void setYStart(int y_coord)
-    {
-        yStart = y_coord;
-    }
-    
-    public int getYStart()
-    {
-        return yStart;
-    }
-    
-    public void setYEnd(int y_coord)
-    {
-        yEnd = y_coord;
-    }
-    
-    public int getYEnd()
-    {
-        return yEnd;
+        left.print();
+        right.print();
     }
 
+
+    public BinNode delete(Seminar sem, int level, int x,
+        int y,
+        int xEnd,
+        int yEnd, BinNode fly) {
+        int decision = level % 2;
+        if (decision == 0) {
+            int split = x + ((xEnd - x) / 2);
+            if (sem.x() > split)
+            {
+                setRight(right.delete(sem, level + 1, split, y, xEnd, yEnd, fly));
+                if (left == fly && right == fly)
+                {
+                    return fly;
+                }
+                else if (left != fly && right == fly && left instanceof LeafNode)
+                {
+                    return left;
+                }
+                else if (left == fly && right != fly && right instanceof LeafNode)
+                {
+                    return right;
+                }
+                return this;
+            }
+            else
+            {
+                setLeft(left.delete(sem, level + 1, x, y, split, yEnd, fly));
+                if (left == fly && right == fly)
+                {
+                    return fly;
+                }
+                else if (left != fly && right == fly && left instanceof LeafNode)
+                {
+                    return left;
+                }
+                else if (left == fly && right != fly && right instanceof LeafNode)
+                {
+                    return right;
+                }
+                return this;
+            }
+        }
+        else {
+            int split = y + ((yEnd - y) / 2);
+            if (sem.y() > split)
+            {
+                setRight(right.delete(sem, level + 1, x, split, xEnd, yEnd, fly));
+                if (left == fly && right == fly)
+                {
+                    return fly;
+                }
+                else if (left != fly && right == fly && left instanceof LeafNode)
+                {
+                    return left;
+                }
+                else if (left == fly && right != fly && right instanceof LeafNode)
+                {
+                    return right;
+                }
+                return this;
+            }
+            else
+            {
+                setLeft(left.delete(sem, level + 1, x, y, xEnd, split, fly));
+                if (left == fly && right == fly)
+                {
+                    return fly;
+                }
+                else if (left != fly && right == fly && left instanceof LeafNode)
+                {
+                    return left;
+                }
+                else if (left == fly && right != fly && right instanceof LeafNode)
+                {
+                    return right;
+                }
+                return this;
+            }
+        }
+    }
+    
 }

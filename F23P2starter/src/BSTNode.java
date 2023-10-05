@@ -59,7 +59,7 @@ public class BSTNode<E extends Comparable<? super E>> {
     }
 
 
-    public boolean isLeaf() {
-        return (left == null) && (right == null);
-    }
+//    public boolean isLeaf() {
+//        return (left == null) && (right == null);
+//    }
 }

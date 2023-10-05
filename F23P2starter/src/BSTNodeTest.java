@@ -30,15 +30,18 @@ public class BSTNodeTest extends TestCase {
         assertEquals(rightNode, node.right());
     }
     
-    public void testIsLeaf() {
-        assertTrue(node.isLeaf());
-
-        BSTNode<String> leftNode = new BSTNode<>("20");
-        node.setLeft(leftNode);
-        assertTrue(!node.isLeaf());
-
-        BSTNode<String> rightNode = new BSTNode<>("50");
-        node.setRight(rightNode);
-        assertTrue(!node.isLeaf());
-    }
+//    public void testIsLeaf() {
+//        assertTrue(node.isLeaf());
+//
+//        BSTNode<String> leftNode = new BSTNode<>("20");
+//        node.setLeft(leftNode);
+//        assertTrue(!node.isLeaf());
+//
+//        BSTNode<String> rightNode = new BSTNode<>("50");
+//        node.setRight(rightNode);
+//        assertTrue(!node.isLeaf());
+//        
+//
+//        
+//    }
 }
