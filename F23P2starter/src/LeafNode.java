@@ -19,28 +19,9 @@ public class LeafNode implements BinNode {
         }
     }
 
-    public BinNode left() {
-        return null;
-    }
-
-
-    public BinNode right() {
-        return null;
-    }
-
-
     public DLList<Seminar> value() {
         return seminars;
     }
-
-
-    public void setLeft(BinNode left) {
-    }
-
-
-    public void setRight(BinNode right) {
-    }
-
 
     public void setValue(Seminar sem) {
         seminars.add(sem);

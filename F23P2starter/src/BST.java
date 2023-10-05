@@ -16,9 +16,8 @@ public class BST<K extends Comparable<K>, E> {
     }
 
 
-    public void insert(KVPair<K, E> node) {
-        root = insertHelp(root, node);
-        nodeCount++;
+    public int size() {
+        return nodeCount;
     }
 
 
@@ -27,22 +26,47 @@ public class BST<K extends Comparable<K>, E> {
     }
 
 
-    public SearchResult rangeSearch(BSTNode<KVPair<K, E>> node, K low, K high, SearchResult output) {
+    public void insert(KVPair<K, E> node) {
+        root = insertHelp(root, node);
+        nodeCount++;
+    }
+
+
+    private BSTNode<KVPair<K, E>> insertHelp(
+        BSTNode<KVPair<K, E>> rt,
+        KVPair<K, E> node) {
+        if (rt == null) {
+            return new BSTNode<KVPair<K, E>>(node);
+        }
+        if (rt.value().compareTo(node) >= 0) {
+            rt.setLeft(insertHelp(rt.left(), node));
+        }
+        else {
+            rt.setRight(insertHelp(rt.right(), node));
+        }
+        return rt;
+    }
+
+
+    public SearchResult rangeSearch(
+        BSTNode<KVPair<K, E>> node,
+        K low,
+        K high,
+        SearchResult output) {
         if (node == null) {
             return output;
         }
-        if (node.value().key().compareTo(low) >= 0)
-        {
+        if (node.value().key().compareTo(low) >= 0) {
             output.setNodesVisited(output.getNodesVisited() + 1);
             rangeSearch(node.left(), low, high, output);
         }
         if (low.compareTo(node.value().key()) <= 0 && high.compareTo(node
             .value().key()) >= 0) {
-            output.setOutput(output.getOutput() + node.value().value().toString() + "\n");
-            
+            output.setOutput(output.getOutput() + node.value().value()
+                .toString() + "\n");
+
         }
-        if (node.value().key().compareTo(high) < 0)
-        {
+        if (node.value().key().compareTo(high) < 0) {
             output.setNodesVisited(output.getNodesVisited() + 1);
             rangeSearch(node.right(), low, high, output);
         }
@@ -60,19 +84,20 @@ public class BST<K extends Comparable<K>, E> {
     }
 
 
-    private BSTNode<KVPair<K, E>> helpFindValue(BSTNode<KVPair<K, E>> root, K key, E value) {
+    private BSTNode<KVPair<K, E>> helpFindValue(
+        BSTNode<KVPair<K, E>> root,
+        K key,
+        E value) {
         if (root == null) {
             return null;
         }
-        
+
         K nodeKey = root.value().key();
         if (nodeKey.compareTo(key) == 0) {
-            if (!root.value().value().equals(value))
-            {
+            if (!root.value().value().equals(value)) {
                 return helpFindValue(root.left(), key, value);
             }
-            else
-            {
+            else {
                 return root;
             }
         }
@@ -95,39 +120,11 @@ public class BST<K extends Comparable<K>, E> {
         return temp;
     }
 
-    private KVPair<K, E> findHelp(BSTNode<KVPair<K, E>> rt, K key) {
-        if (rt == null) {
-            return null;
-        }
-        if (rt.value().compareTo(key) > 0) {
-            return findHelp(rt.left(), key);
-        }
-        else if (rt.value().compareTo(key) == 0) {
-            return rt.value();
-        }
-        else {
-            return findHelp(rt.right(), key);
-        }
-    }
 
-
-    private BSTNode<KVPair<K, E>> insertHelp (
+    private BSTNode<KVPair<K, E>> removeHelp(
         BSTNode<KVPair<K, E>> rt,
-        KVPair<K, E> node) {
-        if (rt == null) {
-            return new BSTNode<KVPair<K, E>>(node);
-        }
-        if (rt.value().compareTo(node) >= 0) {
-            rt.setLeft(insertHelp(rt.left(), node));
-        }
-        else {
-            rt.setRight(insertHelp(rt.right(), node));
-        }
-        return rt;
-    }
-
-
-    private BSTNode<KVPair<K, E>> removeHelp(BSTNode<KVPair<K, E>> rt, K key, E value) {
+        K key,
+        E value) {
         if (rt == null) {
             return null;
         }
@@ -138,8 +135,7 @@ public class BST<K extends Comparable<K>, E> {
             rt.setRight(removeHelp(rt.right(), key, value));
         }
         else {
-            if (rt.value().value() != value)
-            {
+            if (rt.value().value() != value) {
                 rt.setLeft(removeHelp(rt.left(), key, value));
             }
             else if (rt.left() == null) {
@@ -157,6 +153,28 @@ public class BST<K extends Comparable<K>, E> {
         return rt;
     }
 
+
+    public KVPair<K, E> find(K key) {
+        return findHelp(root, key);
+    }
+
+
+    private KVPair<K, E> findHelp(BSTNode<KVPair<K, E>> rt, K key) {
+        if (rt == null) {
+            return null;
+        }
+        if (rt.value().compareTo(key) > 0) {
+            return findHelp(rt.left(), key);
+        }
+        else if (rt.value().compareTo(key) == 0) {
+            return rt.value();
+        }
+        else {
+            return findHelp(rt.right(), key);
+        }
+    }
+
+
     private BSTNode<KVPair<K, E>> getmax(BSTNode<KVPair<K, E>> rt) {
         if (rt.right() == null)
             return rt;
@@ -170,16 +188,6 @@ public class BST<K extends Comparable<K>, E> {
         }
         rt.setRight(deletemax(rt.right()));
         return rt;
-    }
-
-
-    public KVPair<K, E> find(K key) {
-        return findHelp(root, key);
-    }
-
-
-    public int size() {
-        return nodeCount;
     }
 
 
