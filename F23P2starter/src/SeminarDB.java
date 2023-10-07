@@ -166,7 +166,7 @@ public class SeminarDB {
      *            is the radius
      */
     public void searchLocation(int xCoor, int yCoor, int rad) {
-
+        location.search(xCoor, yCoor, rad);
     }
 
 

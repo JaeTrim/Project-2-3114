@@ -53,7 +53,14 @@ public class LeafNode implements BinNode {
         }
         else {
             if (decision == 0) {
-                int split = x + ((xEnd - x) / 2);
+                int split = 0;
+                if ((xEnd - x) % 2 == 0)
+                {
+                    split = x + (((xEnd - x) / 2) - 1);
+                }
+                else {
+                    split = x + ((xEnd - x) / 2);
+                }
                 InternalNode internal = new InternalNode(flyNode);
                 if (((newX > split) && (seminars.get(0).x() > split)) || ((newX <= split) && (seminars.get(0).x() <= split))) {
                     for (int i = 0; i < seminars.size(); i++)
@@ -78,7 +85,14 @@ public class LeafNode implements BinNode {
                 }
             }
             else {
-                int split = y + ((yEnd - y) / 2);
+                int split = 0;
+                if ((yEnd - y) % 2 == 0)
+                {
+                    split = y + (((yEnd - y) / 2) - 1);
+                }
+                else {
+                    split = y + ((yEnd - y) / 2);
+                }
                 InternalNode internal = new InternalNode(flyNode);
                 if (((newY > split) && (seminars.get(0).y() > split)) || ((newY <= split) && (seminars.get(0).y() <= split))) {
                     for (int i = 0; i < seminars.size(); i++)
@@ -107,11 +121,15 @@ public class LeafNode implements BinNode {
     }
 
 
-    public void print() {
+    public void print(int level) {
+        for (int i = 0; i < level; i++)
+        {
+            System.out.print("  ");
+        }
         if (seminars.size() >= 1) {
-            System.out.print("Leaf with " + seminars.size() + " objects: ");
+            System.out.print("Leaf with " + seminars.size() + " objects:");
             for (int j = 0; j < seminars.size(); j++) {
-                System.out.print(seminars.get(j).id() + " ");
+                System.out.print(" " + seminars.get(j).id());
             }
             System.out.println("");
 
@@ -140,5 +158,24 @@ public class LeafNode implements BinNode {
             return fly;
         }
         return this;
+    }
+    
+    public int search(int searchX, int searchY, int radius, int nodeX, int nodeY, int xEnd, int yEnd, int level, int numNodes, BinNode fly)
+    {
+        int boundaryX = searchX - radius;
+        int boundaryY = searchY - radius;
+        int w = 2 * radius + 1;
+        if (seminars.size() == 0)
+        {
+            return numNodes;
+        }
+        else if ((seminars.get(0).x() >= boundaryX) && (seminars.get(0).x() < (boundaryX + w)) && (seminars.get(0).y() >= boundaryY) && (seminars.get(0).y() < (boundaryY + w)))
+        {
+            for (int i = 0; i < seminars.size(); i++)
+            {
+                System.out.println("Found a record with key value " + seminars.get(i).id() + " at " + seminars.get(i).x() + ", " + seminars.get(i).y());
+            }
+        }
+        return numNodes;
     }
 }

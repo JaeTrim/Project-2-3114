@@ -21,7 +21,10 @@ public class BinTreeTest extends TestCase {
         tree.insert(sem);
         BinNode root = tree.getRoot();
         assertTrue(root instanceof LeafNode);
-
+        systemOut().clearHistory();
+        tree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "Leaf with 1 objects: 1\n");
     }
 
 
@@ -46,8 +49,44 @@ public class BinTreeTest extends TestCase {
         tree.delete(sem2);
         tree.delete(sem1);
         tree.delete(sem3);
-        assertTrue(root instanceof InternalNode);
+        root = tree.getRoot();
+        assertTrue(root instanceof LeafNode);
+        systemOut().clearHistory();
+        tree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "E\n");
     }
+    
+    public void testInsertAndDelete2() {
+        BinTree nTree = new BinTree(256);
+        short x1 = 130;
+        short y1 = 120;
+        Seminar sem1 = new Seminar(1, "", "", 0, x1, y1, 0, new String[] { "" },
+            "");
+        short x2 = 90;
+        short y2 = 200;
+        Seminar sem2 = new Seminar(2, "", "", 0, x2, y2, 0, new String[] { "" },
+            "");
+        short x3 = 30;
+        short y3 = 154;
+        Seminar sem3 = new Seminar(3, "", "", 0, x3, y3, 0, new String[] { "" },
+            "");
+        nTree.insert(sem1);
+        nTree.insert(sem2);
+        nTree.insert(sem3);
+        BinNode root = nTree.getRoot();
+        assertTrue(root instanceof InternalNode);
+        nTree.delete(sem2);
+        nTree.delete(sem1);
+        nTree.delete(sem3);
+        root = nTree.getRoot();
+        assertTrue(root instanceof LeafNode);
+        systemOut().clearHistory();
+        nTree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "E\n");
+    }
+
 
 
     public void testInsertOtherCase() {
@@ -63,7 +102,10 @@ public class BinTreeTest extends TestCase {
         tree.insert(sem2);
         BinNode root = tree.getRoot();
         assertTrue(root instanceof InternalNode);
-
+        systemOut().clearHistory();
+        tree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  I\n    I\n      I\n        Leaf with 1 objects: 1\n        Leaf with 1 objects: 2\n      E\n    E\n  E\n");
     }
     
     public void testInsertDuplicate() {
@@ -75,6 +117,10 @@ public class BinTreeTest extends TestCase {
         tree.insert(sem2);
         BinNode root = tree.getRoot();
         assertTrue(root instanceof LeafNode);
+        systemOut().clearHistory();
+        tree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "Leaf with 2 objects: 1 2\n");
     }
     
     public void testInsertSeminarSplitting() {
@@ -99,6 +145,10 @@ public class BinTreeTest extends TestCase {
 
         assertEquals(1, rightLeaf.value().size());
         assertEquals(seminar1, rightLeaf.value().get(0));
+        systemOut().clearHistory();
+        tree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 2\n  Leaf with 1 objects: 1\n");
     }
 
 
@@ -116,7 +166,10 @@ public class BinTreeTest extends TestCase {
         tree.delete(sem1);
         BinNode root = tree.getRoot();
         assertTrue(root instanceof LeafNode);
-
+        systemOut().clearHistory();
+        tree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "Leaf with 1 objects: 2\n");
     }
     
 
@@ -137,6 +190,7 @@ public class BinTreeTest extends TestCase {
         tree.insert(sem1);
         tree.insert(sem2);
         tree.insert(sem3);
+        systemOut().clearHistory();
         tree.print();
         String out = "I\r\n" + "I\r\n" + "I\r\n" + "I\r\n"
             + "Leaf with 1 objects: 1 \r\n" + "Leaf with 1 objects: 2 \r\n"

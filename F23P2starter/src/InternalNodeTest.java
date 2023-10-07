@@ -31,7 +31,10 @@ public class InternalNodeTest extends TestCase {
         list.add(semTemp);
         temp.setList(list);
         assertEquals(temp.value(), list);
-
+        systemOut().clearHistory();
+        temp.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "Leaf with 1 objects: 3\n");
     }
 
 
@@ -49,6 +52,10 @@ public class InternalNodeTest extends TestCase {
         InternalNode left = (InternalNode)result;
         assertEquals(rootNode.left(), left.left());
         assertEquals(rootNode.right(), flyNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 1\n  E\n");
     }
 
 
@@ -66,6 +73,10 @@ public class InternalNodeTest extends TestCase {
         InternalNode left = (InternalNode)result;
         assertEquals(rootNode.left(), left.left());
         assertEquals(rootNode.right(), flyNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 1\n  E\n");
     }
 
 
@@ -83,6 +94,10 @@ public class InternalNodeTest extends TestCase {
         InternalNode left = (InternalNode)result;
         assertEquals(rootNode.left(), left.left());
         assertEquals(rootNode.right(), flyNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 1\n  E\n");
     }
 
 
@@ -100,6 +115,10 @@ public class InternalNodeTest extends TestCase {
         InternalNode left = (InternalNode)result;
         assertEquals(rootNode.left(), left.left());
         assertEquals(rootNode.right(), flyNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 1\n  E\n");
     }
 
 
@@ -131,6 +150,10 @@ public class InternalNodeTest extends TestCase {
         LeafNode rightLeaf2 = (LeafNode)node.right();
         assertEquals(node.left(), flyNode);
         assertEquals(node.right(), rightLeaf2);
+        systemOut().clearHistory();
+        node.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  Leaf with 1 objects: 3\n");
     }
 
 
@@ -141,7 +164,7 @@ public class InternalNodeTest extends TestCase {
             "");
         InternalNode node = new InternalNode(flyNode);
         node.insert(temp, flyNode, x, y, 128, 128, 1);
-        node.print();
+        node.print(0);
         LeafNode leaf = (LeafNode)node.right();
         assertEquals(node.left(), flyNode);
         assertEquals(node.right(), leaf);
@@ -163,6 +186,10 @@ public class InternalNodeTest extends TestCase {
         LeafNode leaf2 = (LeafNode)node.right();
         assertEquals(node.right(), leaf2);
         assertEquals(node.right(), flyNode);
+        systemOut().clearHistory();
+        node.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 3\n  E\n");
     }
 
 
@@ -174,17 +201,16 @@ public class InternalNodeTest extends TestCase {
         BinTree tree = new BinTree(128);
         tree.insert(temp);
         assertTrue(tree.getRoot() instanceof LeafNode);
-        tree.insert(temp);
-        assertTrue(tree.getRoot() instanceof LeafNode);
-        LeafNode leaf = (LeafNode)tree.getRoot();
         x = 50;
         y = 50;
-        Seminar temp2 = new Seminar(3, "", "", 0, x, y, 0, new String[] { "" },
+        Seminar temp2 = new Seminar(4, "", "", 0, x, y, 0, new String[] { "" },
             "");
-        leaf.insert(temp2, flyNode, x, y, x, y, 1);
         tree.insert(temp2);
         assertTrue(tree.getRoot() instanceof InternalNode);
-
+        systemOut().clearHistory();
+        tree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 4\n  Leaf with 1 objects: 3\n");
     }
 
 
@@ -200,6 +226,10 @@ public class InternalNodeTest extends TestCase {
         rootNode.insert(sem, flyNode, x, y, xEnd, yEnd, level);
         assertTrue(rootNode.left() instanceof LeafNode);
         assertEquals(rootNode.right(), flyNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 1\n  E\n");
     }
 
 
@@ -215,7 +245,10 @@ public class InternalNodeTest extends TestCase {
         rootNode.insert(sem, flyNode, x, y, xEnd, yEnd, level);
         assertTrue(rootNode.right() instanceof LeafNode);
         assertEquals(rootNode.right(), flyNode);
-
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  Leaf with 1 objects: 1\n  E\n");
     }
 
 
@@ -253,6 +286,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(newRoot.left(), fly);
         assertTrue(newRoot.right() instanceof LeafNode);
         tree.print();
+        systemOut().clearHistory();
+        tree.print();
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  Leaf with 1 objects: 3\n");
     }
 
 
@@ -274,6 +311,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(result, rightChild);
         assertEquals(rootNode.left(), flyNode);
         assertEquals(rootNode.right(), rightChild);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  E\n");
     }
 
 
@@ -295,6 +336,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(result, rightChild);
         assertEquals(rootNode.left(), flyNode);
         assertEquals(rootNode.right(), rightChild); 
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  E\n");
     }
 
 
@@ -312,6 +357,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(result, flyNode);
         assertEquals(rootNode.left(), flyNode);
         assertEquals(rootNode.right(), flyNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  E\n");
     }
 
 
@@ -329,6 +378,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(result, flyNode);
         assertEquals(rootNode.left(), flyNode);
         assertEquals(rootNode.right(), flyNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  E\n");
     }
 
 
@@ -351,6 +404,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(result, rootNode);
         assertEquals(rootNode.left(), flyNode);
         assertEquals(rootNode.right(), rightNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  I\n    E\n    E\n");
     }
 
 
@@ -373,6 +430,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(result, rootNode);
         assertEquals(rootNode.left(), flyNode);
         assertEquals(rootNode.right(), rightNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  I\n    E\n    E\n");
     }
 
 
@@ -396,6 +457,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(rootNode.right(), rightNode);
         assertTrue(rootNode.left() instanceof LeafNode);
         assertTrue(rootNode.right() instanceof LeafNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  E\n");
     }
 
 
@@ -419,6 +484,10 @@ public class InternalNodeTest extends TestCase {
         assertEquals(rootNode.right(), rightNode);
         assertTrue(rootNode.left() instanceof LeafNode);
         assertTrue(rootNode.right() instanceof LeafNode);
+        systemOut().clearHistory();
+        rootNode.print(0);
+        String history = systemOut().getHistory();
+        assertEquals(history, "I\n  E\n  E\n");
     }
 
 
@@ -433,9 +502,8 @@ public class InternalNodeTest extends TestCase {
         tree.insert(temp);
         tree.insert(temp2);
         LeafNode root = (LeafNode)tree.getRoot();
-        root.print();
+        root.print(0);
         String out = "Leaf with 2 objects: 3 3 ";
         assertFuzzyEquals(systemOut().getHistory(), out);
-
     }
 }

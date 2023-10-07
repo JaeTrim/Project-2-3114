@@ -84,7 +84,7 @@ public class FileReader {
             }
             else if (currLine.contains("search")) {
                 String[] searchLine = currLine.split("\\s+");
-                if (searchLine[1] == "location") {
+                if (searchLine[1].equals("location")) {
                     int x = Integer.parseInt(searchLine[2]);
                     int y = Integer.parseInt(searchLine[3]);
                     int radius = Integer.parseInt(searchLine[4]);
