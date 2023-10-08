@@ -1,4 +1,3 @@
-
 public class InternalNode implements BinNode {
 
     private BinNode left;
@@ -9,28 +8,23 @@ public class InternalNode implements BinNode {
         right = fly;
     }
 
-
     public BinNode left() {
         return left;
     }
-
 
     public BinNode setLeft(BinNode temp) {
         left = temp;
         return left;
     }
 
-
     public BinNode setRight(BinNode temp) {
         right = temp;
         return right;
     }
 
-
     public BinNode right() {
         return right;
     }
-
 
     public BinNode insert(
         Seminar sem,
@@ -206,25 +200,19 @@ public class InternalNode implements BinNode {
             else {
                 split = nodeX + ((xEnd - nodeX) / 2);
             }
-            if ((boundaryX <= split) && ((boundaryX + w) <= split) && (left != fly))
+            if ((boundaryX <= split) && ((boundaryX + w) <= split + 1))
             {
                 return left.search(searchX, searchY, radius, nodeX, nodeY, split, yEnd, level + 1, numNodes + 1, fly);
             }
-            else if ((boundaryX > split) && ((boundaryX + w) > split)&& (right != fly))
+            else if ((boundaryX > split) && ((boundaryX + w) > split + 1))
             {
                 return right.search(searchX, searchY, radius, split + 1, nodeY, xEnd, yEnd, level + 1, numNodes + 1, fly);
             }
             else
             {
                 int currNum = numNodes;
-//                if (left != fly)
-//                {
-                    currNum = left.search(searchX, searchY, radius, nodeX, nodeY, split, yEnd, level + 1, currNum + 1, fly);
-                //}
-//                if (right != fly)
-//                {
-                    currNum = right.search(searchX, searchY, radius, split + 1, nodeY, xEnd, yEnd, level + 1, currNum + 1, fly);
-                //}
+                currNum = left.search(searchX, searchY, radius, nodeX, nodeY, split, yEnd, level + 1, currNum + 1, fly);
+                currNum = right.search(searchX, searchY, radius, split + 1, nodeY, xEnd, yEnd, level + 1, currNum + 1, fly);
                 return currNum;
             } 
         }
@@ -238,25 +226,19 @@ public class InternalNode implements BinNode {
             else {
                 split = nodeY + ((yEnd - nodeY) / 2);
             }
-            if ((boundaryY <= split) && ((boundaryY + w) <= split) && (left != fly))
+            if ((boundaryY <= split) && ((boundaryY + w) <= split + 1))
             {
                 return left.search(searchX, searchY, radius, nodeX, nodeY, xEnd, split, level + 1, numNodes + 1, fly);
             }
-            else if ((boundaryX > split) && ((boundaryX + w) > split) && (right != fly))
+            else if ((boundaryY > split) && ((boundaryY + w) > split + 1))
             {
                 return right.search(searchX, searchY, radius, nodeX, split + 1, xEnd, yEnd, level + 1, numNodes + 1, fly);
             }
             else
             {
                 int currNum = numNodes;
-//                if (left != fly)
-//                {
-                    currNum = left.search(searchX, searchY, radius, nodeX, nodeY, xEnd, split, level + 1, currNum + 1, fly);
-                //}
-//                if (right != fly)
-//                {
-                    currNum = right.search(searchX, searchY, radius, nodeX, split + 1, xEnd, yEnd, level + 1, currNum + 1, fly);
-//                }
+                currNum = left.search(searchX, searchY, radius, nodeX, nodeY, xEnd, split, level + 1, currNum + 1, fly);
+                currNum = right.search(searchX, searchY, radius, nodeX, split + 1, xEnd, yEnd, level + 1, currNum + 1, fly);
                 return currNum;
             } 
         }

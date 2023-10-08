@@ -18,7 +18,11 @@ public class DLList<T> {
      * Constructor to call helper setUp
      */
     public DLList() {
-        reset();
+        head = new DLList.Node<T>(null);
+        tail = new DLList.Node<T>(null);
+        head.setNext(tail);
+        tail.setPrevious(head);
+        size = 0;
     }
 
 
@@ -176,6 +180,8 @@ public class DLList<T> {
         }
         return curr;
     }
+    
+    
 
     /**
      * Private Node class for doubly linked list
@@ -238,7 +244,6 @@ public class DLList<T> {
             return previous;
         }
 
-
         /**
          * Gets data in node
          * 
@@ -248,5 +253,4 @@ public class DLList<T> {
             return data;
         }
     }
-
 }

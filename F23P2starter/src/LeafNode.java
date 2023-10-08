@@ -19,9 +19,11 @@ public class LeafNode implements BinNode {
         }
     }
 
+
     public DLList<Seminar> value() {
         return seminars;
     }
+
 
     public void setValue(Seminar sem) {
         seminars.add(sem);
@@ -34,7 +36,14 @@ public class LeafNode implements BinNode {
     }
 
 
-    public BinNode insert(Seminar sem, BinNode flyNode, int x, int y, int xEnd, int yEnd, int level) {
+    public BinNode insert(
+        Seminar sem,
+        BinNode flyNode,
+        int x,
+        int y,
+        int xEnd,
+        int yEnd,
+        int level) {
         int decision = level % 2;
         int newX = sem.x();
         int newY = sem.y();
@@ -42,32 +51,33 @@ public class LeafNode implements BinNode {
             LeafNode leaf = new LeafNode();
             return leaf.insert(sem, flyNode, x, y, xEnd, yEnd, level);
         }
-        else if (this.isEmpty())
-        {
+        else if (this.isEmpty()) {
             setValue(sem);
             return this;
         }
         else if (seminars.get(0).x() == newX && seminars.get(0).y() == newY) {
             seminars.add(sem);
+            sortListAscending();
             return this;
         }
         else {
             if (decision == 0) {
                 int split = 0;
-                if ((xEnd - x) % 2 == 0)
-                {
+                if ((xEnd - x) % 2 == 0) {
                     split = x + (((xEnd - x) / 2) - 1);
                 }
                 else {
                     split = x + ((xEnd - x) / 2);
                 }
                 InternalNode internal = new InternalNode(flyNode);
-                if (((newX > split) && (seminars.get(0).x() > split)) || ((newX <= split) && (seminars.get(0).x() <= split))) {
-                    for (int i = 0; i < seminars.size(); i++)
-                    {
-                        internal.insert(seminars.get(i), flyNode, x, y, xEnd, yEnd, level);
+                if (((newX > split) && (seminars.get(0).x() > split))
+                    || ((newX <= split) && (seminars.get(0).x() <= split))) {
+                    for (int i = 0; i < seminars.size(); i++) {
+                        internal.insert(seminars.get(i), flyNode, x, y, xEnd,
+                            yEnd, level);
                     }
-                    return internal.insert(sem, flyNode, x, y, xEnd, yEnd, level);
+                    return internal.insert(sem, flyNode, x, y, xEnd, yEnd,
+                        level);
                 }
                 else if (seminars.get(0).x() > newX) {
                     internal.setRight(this);
@@ -86,20 +96,21 @@ public class LeafNode implements BinNode {
             }
             else {
                 int split = 0;
-                if ((yEnd - y) % 2 == 0)
-                {
+                if ((yEnd - y) % 2 == 0) {
                     split = y + (((yEnd - y) / 2) - 1);
                 }
                 else {
                     split = y + ((yEnd - y) / 2);
                 }
                 InternalNode internal = new InternalNode(flyNode);
-                if (((newY > split) && (seminars.get(0).y() > split)) || ((newY <= split) && (seminars.get(0).y() <= split))) {
-                    for (int i = 0; i < seminars.size(); i++)
-                    {
-                        internal.insert(seminars.get(i), flyNode, x, y, xEnd, yEnd, level);
+                if (((newY > split) && (seminars.get(0).y() > split))
+                    || ((newY <= split) && (seminars.get(0).y() <= split))) {
+                    for (int i = 0; i < seminars.size(); i++) {
+                        internal.insert(seminars.get(i), flyNode, x, y, xEnd,
+                            yEnd, level);
                     }
-                    return internal.insert(sem, flyNode, x, y, xEnd, yEnd, level);
+                    return internal.insert(sem, flyNode, x, y, xEnd, yEnd,
+                        level);
                 }
                 else if (seminars.get(0).y() > newY) {
                     internal.setRight(this);
@@ -122,8 +133,7 @@ public class LeafNode implements BinNode {
 
 
     public void print(int level) {
-        for (int i = 0; i < level; i++)
-        {
+        for (int i = 0; i < level; i++) {
             System.out.print("  ");
         }
         if (seminars.size() >= 1) {
@@ -134,48 +144,83 @@ public class LeafNode implements BinNode {
             System.out.println("");
 
         }
-        else if (seminars.size() == 0)
-        {
+        else {
             System.out.println("E");
         }
     }
 
-    
-    public BinNode delete(Seminar sem, int level, int x, int y, int xEnd, int yEnd, BinNode fly)
-    {
-        if (seminars.get(0).x() == sem.x() && seminars.get(0).y() == sem.y())
-        {
-            for (int i = 0; i < seminars.size(); i++)
-            {
-                if (seminars.get(i).id() == sem.id())
-                {
+
+    public BinNode delete(
+        Seminar sem,
+        int level,
+        int x,
+        int y,
+        int xEnd,
+        int yEnd,
+        BinNode fly) {
+        if (seminars.get(0).x() == sem.x() && seminars.get(0).y() == sem.y()) {
+            for (int i = 0; i < seminars.size(); i++) {
+                if (seminars.get(i).id() == sem.id()) {
                     seminars.remove(i);
                 }
             }
         }
-        if (seminars.size() == 0)
-        {
+        if (seminars.size() == 0) {
             return fly;
         }
         return this;
     }
-    
-    public int search(int searchX, int searchY, int radius, int nodeX, int nodeY, int xEnd, int yEnd, int level, int numNodes, BinNode fly)
-    {
-        int boundaryX = searchX - radius;
-        int boundaryY = searchY - radius;
-        int w = 2 * radius + 1;
-        if (seminars.size() == 0)
-        {
+
+
+    public int search(
+        int searchX,
+        int searchY,
+        int radius,
+        int nodeX,
+        int nodeY,
+        int xEnd,
+        int yEnd,
+        int level,
+        int numNodes,
+        BinNode fly) {
+//        int boundaryX = searchX - radius;
+//        int boundaryY = searchY - radius;
+//        int w = 2 * radius + 1;
+        if (seminars.size() == 0) {
             return numNodes;
         }
-        else if ((seminars.get(0).x() >= boundaryX) && (seminars.get(0).x() < (boundaryX + w)) && (seminars.get(0).y() >= boundaryY) && (seminars.get(0).y() < (boundaryY + w)))
-        {
-            for (int i = 0; i < seminars.size(); i++)
-            {
-                System.out.println("Found a record with key value " + seminars.get(i).id() + " at " + seminars.get(i).x() + ", " + seminars.get(i).y());
+// else if ((seminars.get(0).x() >= boundaryX) && (seminars.get(0)
+// .x() <= (boundaryX + w)) && (seminars.get(0).y() >= boundaryY)
+// && (seminars.get(0).y() <= (boundaryY + w))) {
+// for (int i = 0; i < seminars.size(); i++) {
+// System.out.println("Found a record with key value " + seminars
+// .get(i).id() + " at " + seminars.get(i).x() + ", "
+// + seminars.get(i).y());
+// }
+        else {
+            int pX = seminars.get(0).x() - searchX;
+            int pY = seminars.get(0).y() - searchY;
+            if (pX * pX + pY * pY <= (radius * radius)) {
+                for (int i = 0; i < seminars.size(); i++) {
+                    System.out.println("Found a record with key value "
+                        + seminars.get(i).id() + " at " + seminars.get(i).x()
+                        + ", " + seminars.get(i).y());
+                }
             }
         }
         return numNodes;
+    }
+
+
+    private void sortListAscending() {
+        for (int i = 0; i < seminars.size() - 1; i++) {
+            for (int j = i + 1; j < seminars.size(); j++) {
+                if (seminars.get(i).id() > seminars.get(j).id()) {
+                    Seminar temp = seminars.get(j);
+                    seminars.remove(j);
+                    seminars.add(i, temp);
+                }
+            }
+        }
     }
 }

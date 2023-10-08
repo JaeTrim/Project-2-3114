@@ -57,9 +57,4 @@ public class BSTNode<E extends Comparable<? super E>> {
     public void setRight(BSTNode<E> p) {
         right = p;
     }
-
-
-//    public boolean isLeaf() {
-//        return (left == null) && (right == null);
-//    }
 }

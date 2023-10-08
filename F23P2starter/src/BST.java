@@ -192,22 +192,25 @@ public class BST<K extends Comparable<K>, E> {
 
 
     public void print() {
-        printTree(root);
+        printTree(root, 0);
     }
 
 
-    private void printTree(BSTNode<KVPair<K, E>> bstNode) {
-        int count = 0;
+    private void printTree(BSTNode<KVPair<K, E>> bstNode, int lev) {
         if (bstNode == null) {
-            if (count > 0) {
-                System.out.println("null");
-                count++;
+            for (int i = 0; i < lev; i++)
+            {
+                System.out.print("  ");
             }
             System.out.println("null");
             return;
         }
-        printTree(bstNode.right());
-        System.out.println(bstNode.value().key());
-        printTree(bstNode.left());
+        printTree(bstNode.right(), lev + 1);
+        for (int i = 0; i < lev; i++)
+        {
+            System.out.print("  ");
+        }
+        System.out.print(bstNode.value().key() + "\n");
+        printTree(bstNode.left(), lev + 1);
     }
 }
