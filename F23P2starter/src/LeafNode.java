@@ -183,20 +183,9 @@ public class LeafNode implements BinNode {
         int level,
         int numNodes,
         BinNode fly) {
-//        int boundaryX = searchX - radius;
-//        int boundaryY = searchY - radius;
-//        int w = 2 * radius + 1;
         if (seminars.size() == 0) {
             return numNodes;
         }
-// else if ((seminars.get(0).x() >= boundaryX) && (seminars.get(0)
-// .x() <= (boundaryX + w)) && (seminars.get(0).y() >= boundaryY)
-// && (seminars.get(0).y() <= (boundaryY + w))) {
-// for (int i = 0; i < seminars.size(); i++) {
-// System.out.println("Found a record with key value " + seminars
-// .get(i).id() + " at " + seminars.get(i).x() + ", "
-// + seminars.get(i).y());
-// }
         else {
             int pX = seminars.get(0).x() - searchX;
             int pY = seminars.get(0).y() - searchY;

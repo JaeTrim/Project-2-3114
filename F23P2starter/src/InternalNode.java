@@ -111,18 +111,6 @@ public class InternalNode implements BinNode {
             {
                 setLeft(left.delete(sem, level + 1, x, y, split, yEnd, fly));
             }
-            if (left == fly && right == fly)
-            {
-                return fly;
-            }
-            else if (left != fly && right == fly && left instanceof LeafNode)
-            {
-                return left;
-            }
-            else if (left == fly && right != fly && right instanceof LeafNode)
-            {
-                return right;
-            }
         }
         else {
             int split = 0;
