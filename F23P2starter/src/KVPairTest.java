@@ -54,13 +54,13 @@ public class KVPairTest extends TestCase {
      * Test Compare
      */
     public void testCompareToKVPair() {
-        KVPair<Integer, String> pair = new KVPair<>(40, "Test");
+        KVPair<Integer, String> pair1 = new KVPair<>(40, "Test");
         KVPair<Integer, String> otherKVPair = new KVPair<>(25, "Test1");
-        assertTrue(pair.compareTo(otherKVPair) > 0);
-        assertTrue(otherKVPair.compareTo(pair) < 0);
+        assertTrue(pair1.compareTo(otherKVPair) > 0);
+        assertTrue(otherKVPair.compareTo(pair1) < 0);
 
         KVPair<Integer, String> sameKeyKVPair = new KVPair<>(40, "Test2");
-        assertEquals(0, pair.compareTo(sameKeyKVPair));
+        assertEquals(0, pair1.compareTo(sameKeyKVPair));
     }
 
 
@@ -68,14 +68,14 @@ public class KVPairTest extends TestCase {
      * Test Compare
      */
     public void testCompareToKey() {
-        KVPair<Integer, String> pair = new KVPair<>(40, "Test");
+        KVPair<Integer, String> pair1 = new KVPair<>(40, "Test");
         Integer key = 25;
-        assertTrue(pair.compareTo(key) > 0);
+        assertTrue(pair1.compareTo(key) > 0);
 
         Integer sameKey = 40;
-        assertEquals(0, pair.compareTo(sameKey));
+        assertEquals(0, pair1.compareTo(sameKey));
 
         Integer greaterKey = 50;
-        assertTrue(pair.compareTo(greaterKey) < 0);
+        assertTrue(pair1.compareTo(greaterKey) < 0);
     }
 }

@@ -297,7 +297,6 @@ public class InternalNode implements BinNode {
         int split = 0;
         if ((end - coor) % 2 == 0) {
             split = coor + (((end - coor) / 2) - 1);
-
         }
         else {
             split = coor + ((end - coor) / 2);

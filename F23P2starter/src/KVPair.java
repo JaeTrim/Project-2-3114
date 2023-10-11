@@ -12,8 +12,9 @@
  */
 public class KVPair<K extends Comparable<K>, E>
     implements Comparable<KVPair<K, E>> {
-    K theKey;
-    E theVal;
+    
+    private K theKey;
+    private E theVal;
 
     /**
      * KV Pair Constructor
@@ -34,6 +35,7 @@ public class KVPair<K extends Comparable<K>, E>
      * 
      * @param it
      *            new KV Pair
+     * @return integer representing relative size
      */
     public int compareTo(KVPair<K, E> it) {
         return theKey.compareTo(it.key());
@@ -45,6 +47,7 @@ public class KVPair<K extends Comparable<K>, E>
      * 
      * @param it
      *            new key
+     * @return integer representing relative size
      */
     public int compareTo(K it) {
         return theKey.compareTo(it);

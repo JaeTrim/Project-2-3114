@@ -212,31 +212,31 @@ public class InternalNodeTest extends TestCase {
         short y = 10;
         Seminar temp = new Seminar(3, "", "", 0, x, y, 0, new String[] { "" },
             "");
-        InternalNode node = new InternalNode(flyNode);
-        node.insert(temp, flyNode, x, y, 128, 128, 0);
-        LeafNode leftLeaf = (LeafNode)node.left();
-        assertEquals(node.left(), leftLeaf);
-        assertEquals(node.right(), flyNode);
+        InternalNode node1 = new InternalNode(flyNode);
+        node1.insert(temp, flyNode, x, y, 128, 128, 0);
+        LeafNode leftLeaf = (LeafNode)node1.left();
+        assertEquals(node1.left(), leftLeaf);
+        assertEquals(node1.right(), flyNode);
         x = 100;
         y = 100;
         Seminar temp2 = new Seminar(3, "", "", 0, x, y, 0, new String[] { "" },
             "");
-        node = new InternalNode(flyNode);
-        node.insert(temp2, flyNode, 0, 0, 128, 128, 0);
-        LeafNode rightLeaf = (LeafNode)node.right();
-        assertEquals(node.left(), flyNode);
-        assertEquals(node.right(), rightLeaf);
+        node1 = new InternalNode(flyNode);
+        node1.insert(temp2, flyNode, 0, 0, 128, 128, 0);
+        LeafNode rightLeaf = (LeafNode)node1.right();
+        assertEquals(node1.left(), flyNode);
+        assertEquals(node1.right(), rightLeaf);
         x = 100;
         y = 100;
         Seminar temp3 = new Seminar(3, "", "", 0, x, y, 0, new String[] { "" },
             "");
-        node = new InternalNode(flyNode);
-        node.insert(temp3, flyNode, 0, 0, 64, 64, 0);
-        LeafNode rightLeaf2 = (LeafNode)node.right();
-        assertEquals(node.left(), flyNode);
-        assertEquals(node.right(), rightLeaf2);
+        node1 = new InternalNode(flyNode);
+        node1.insert(temp3, flyNode, 0, 0, 64, 64, 0);
+        LeafNode rightLeaf2 = (LeafNode)node1.right();
+        assertEquals(node1.left(), flyNode);
+        assertEquals(node1.right(), rightLeaf2);
         systemOut().clearHistory();
-        node.print(0);
+        node1.print(0);
         String history = systemOut().getHistory();
         assertEquals(history, "I\n  E\n  Leaf with 1 objects: 3\n");
     }
@@ -250,32 +250,32 @@ public class InternalNodeTest extends TestCase {
         short y = 200;
         Seminar temp = new Seminar(3, "", "", 0, x, y, 0, new String[] { "" },
             "");
-        InternalNode node = new InternalNode(flyNode);
-        node.insert(temp, flyNode, x, y, 128, 128, 1);
-        node.print(0);
-        LeafNode leaf = (LeafNode)node.right();
-        assertEquals(node.left(), flyNode);
-        assertEquals(node.right(), leaf);
+        InternalNode node1 = new InternalNode(flyNode);
+        node1.insert(temp, flyNode, x, y, 128, 128, 1);
+        node1.print(0);
+        LeafNode leaf = (LeafNode)node1.right();
+        assertEquals(node1.left(), flyNode);
+        assertEquals(node1.right(), leaf);
         x = 100;
         y = 100;
         Seminar temp2 = new Seminar(3, "", "", 0, x, y, 0, new String[] { "" },
             "");
-        node = new InternalNode(flyNode);
-        node.insert(temp2, flyNode, 0, 0, 128, 128, 1);
-        LeafNode rightLeaf = (LeafNode)node.right();
-        assertEquals(node.left(), flyNode);
-        assertEquals(node.right(), rightLeaf);
+        node1 = new InternalNode(flyNode);
+        node1.insert(temp2, flyNode, 0, 0, 128, 128, 1);
+        LeafNode rightLeaf = (LeafNode)node1.right();
+        assertEquals(node1.left(), flyNode);
+        assertEquals(node1.right(), rightLeaf);
         x = 100;
         y = 10;
         Seminar temp3 = new Seminar(3, "", "", 0, x, y, 0, new String[] { "" },
             "");
-        node = new InternalNode(flyNode);
-        node.insert(temp3, flyNode, 0, 0, 64, 128, 1);
-        LeafNode leaf2 = (LeafNode)node.right();
-        assertEquals(node.right(), leaf2);
-        assertEquals(node.right(), flyNode);
+        node1 = new InternalNode(flyNode);
+        node1.insert(temp3, flyNode, 0, 0, 64, 128, 1);
+        LeafNode leaf2 = (LeafNode)node1.right();
+        assertEquals(node1.right(), leaf2);
+        assertEquals(node1.right(), flyNode);
         systemOut().clearHistory();
-        node.print(0);
+        node1.print(0);
         String history = systemOut().getHistory();
         assertEquals(history, "I\n  Leaf with 1 objects: 3\n  E\n");
     }
@@ -660,36 +660,34 @@ public class InternalNodeTest extends TestCase {
      * Test More
      */
     public void testRight() {
-        InternalNode node = new InternalNode(internalNode);
+        InternalNode node1 = new InternalNode(internalNode);
         Seminar seminar = new Seminar();
-        BinNode resultNode = node.insert(seminar, internalNode, 50, 0, 100, 100,
-            0);
+        BinNode resultNode = node1.insert(seminar, internalNode, 50, 0, 100,
+            100, 0);
         assertTrue(resultNode instanceof InternalNode);
-        node = new InternalNode(internalNode);
+        node1 = new InternalNode(internalNode);
         seminar = new Seminar();
-        resultNode = node.insert(seminar, internalNode, 0, 0, 50, 100, 0);
+        resultNode = node1.insert(seminar, internalNode, 0, 0, 50, 100, 0);
         assertTrue(resultNode instanceof InternalNode);
-        node = new InternalNode(internalNode);
+        node1 = new InternalNode(internalNode);
         seminar = new Seminar();
-        resultNode = node.insert(seminar, internalNode, 0, 0, 100, 100, 0);
+        resultNode = node1.insert(seminar, internalNode, 0, 0, 100, 100, 0);
         assertTrue(resultNode instanceof InternalNode);
-        node = new InternalNode(internalNode);
+        node1 = new InternalNode(internalNode);
         seminar = new Seminar();
-        resultNode = node.insert(seminar, internalNode, 0, 0, 100, 100, 1);
+        resultNode = node1.insert(seminar, internalNode, 0, 0, 100, 100, 1);
         assertTrue(resultNode instanceof InternalNode);
-        node = new InternalNode(internalNode);
+        node1 = new InternalNode(internalNode);
         seminar = new Seminar();
-        resultNode = node.insert(seminar, internalNode, 0, 0, 100, 100, 2);
+        resultNode = node1.insert(seminar, internalNode, 0, 0, 100, 100, 2);
         assertTrue(resultNode instanceof InternalNode);
         seminar = new Seminar();
         resultNode = internalNode.insert(seminar, internalNode, 0, 0, 100, 100,
             0);
         Seminar seminar1 = new Seminar();
         Seminar seminar2 = new Seminar();
-        BinNode resultNode1 = internalNode.insert(seminar1, internalNode, 0, 0,
-            100, 100, 0);
-        BinNode resultNode2 = internalNode.insert(seminar2, internalNode, 0, 0,
-            100, 100, 0);
+        internalNode.insert(seminar1, internalNode, 0, 0, 100, 100, 0);
+        internalNode.insert(seminar2, internalNode, 0, 0, 100, 100, 0);
         seminar = new Seminar();
         resultNode = internalNode.insert(seminar, internalNode, 0, 0, 100, 100,
             0);
@@ -812,42 +810,42 @@ public class InternalNodeTest extends TestCase {
      * Test More
      */
     public void testInternalNodeMore() {
-        BinNode flyNode = new LeafNode();
-        InternalNode internalNode = new InternalNode(flyNode);
+        BinNode fly = new LeafNode();
+        InternalNode node1 = new InternalNode(fly);
 
         Seminar seminar = new Seminar();
 
-        BinNode result = internalNode.insert(seminar, flyNode, 0, 0, 10, 10, 0);
+        BinNode result = node1.insert(seminar, fly, 0, 0, 10, 10, 0);
 
-        assertEquals(internalNode, result);
-        assertNotNull(internalNode.left());
-        assertNotNull(internalNode.right());
+        assertEquals(node1, result);
+        assertNotNull(node1.left());
+        assertNotNull(node1.right());
 
         BinNode leftNode = new LeafNode();
         BinNode rightNode = new LeafNode();
-        internalNode = new InternalNode(leftNode);
-        internalNode.setRight(rightNode);
+        node1 = new InternalNode(leftNode);
+        node1.setRight(rightNode);
 
         seminar = new Seminar();
-        result = internalNode.insert(seminar, new LeafNode(), 0, 0, 10, 10, 2);
+        result = node1.insert(seminar, new LeafNode(), 0, 0, 10, 10, 2);
         InternalNode res = (InternalNode)result;
 
-        assertEquals(internalNode, res);
+        assertEquals(node1, res);
 
         assertNotNull(res.left());
         assertNotNull(res.right());
 
         leftNode = new LeafNode();
         rightNode = new LeafNode();
-        internalNode = new InternalNode(leftNode);
-        internalNode.setRight(rightNode);
+        node1 = new InternalNode(leftNode);
+        node1.setRight(rightNode);
 
         seminar = new Seminar();
 
-        result = internalNode.insert(seminar, new LeafNode(), 0, 0, 10, 10, 3);
+        result = node1.insert(seminar, new LeafNode(), 0, 0, 10, 10, 3);
         res = (InternalNode)result;
 
-        assertEquals(internalNode, res);
+        assertEquals(node1, res);
 
         assertNotNull(res.left());
         assertNotNull(res.right());

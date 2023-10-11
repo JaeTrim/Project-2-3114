@@ -236,7 +236,7 @@ public class BSTTest extends TestCase {
         bst.insert(new KVPair<>(1, "One"));
         bst.insert(new KVPair<>(2, "Two"));
         bst.insert(new KVPair<>(3, "Three"));
-        assertEquals("One", bst.remove(1, "One").theVal);
+        assertEquals("One", bst.remove(1, "One").value());
         bst.remove(1, "One");
         assertNull(bst.find(1));
         assertNull(bst.find(20));
@@ -440,7 +440,7 @@ public class BSTTest extends TestCase {
         assertNull(bst.getRoot().right());
         bst.remove(10, "apple");
         BSTNode<KVPair<Integer, String>> root = bst.getRoot();
-        assertEquals(root.value().theVal, "banana");
+        assertEquals(root.value().value(), "banana");
 
         System.out.println("Break");
         systemOut().clearHistory();

@@ -59,6 +59,9 @@ public class DLListTest extends TestCase {
         assertEquals(1, list.size());
     }
     
+    /**
+     * Tests the size of the list when removing
+     */
     public void testRemoveSize() {
         assertEquals(list.size(), 0);
         list.add("A");

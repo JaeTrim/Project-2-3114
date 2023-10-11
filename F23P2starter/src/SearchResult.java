@@ -7,8 +7,8 @@
  */
 public class SearchResult {
 
-    String output;
-    int nodesVisited;
+    private String output;
+    private int nodesVisited;
 
     /**
      * Constructor for SearchResult

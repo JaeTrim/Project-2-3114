@@ -93,7 +93,8 @@ public class LeafNodeTest extends TestCase {
         rootNode.print(0);
         String history = systemOut().getHistory();
         assertEquals(history,
-            "I\n  I\n    I\n      Leaf with 1 objects: 1\n      Leaf with 1 objects: 2\n    E\n  E\n");
+            "I\n  I\n    I\n      Leaf with 1 objects: 1\n      "
+            + "Leaf with 1 objects: 2\n    E\n  E\n");
     }
 
 
@@ -123,7 +124,8 @@ public class LeafNodeTest extends TestCase {
         rootNode.print(0);
         String history = systemOut().getHistory();
         assertEquals(history,
-            "I\n  I\n    I\n      Leaf with 1 objects: 1\n      Leaf with 1 objects: 2\n    E\n  E\n");
+            "I\n  I\n    I\n      Leaf with 1 objects: 1\n      "
+            + "Leaf with 1 objects: 2\n    E\n  E\n");
 
     }
 

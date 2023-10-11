@@ -15,7 +15,7 @@ public class BinTreeTest extends TestCase {
     private BinNode root;
 
     /**
-     * setUp Constructor
+     * SetUp Constructor
      */
     public void setUp() {
         tree = new BinTree(128);
