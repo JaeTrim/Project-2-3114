@@ -263,8 +263,7 @@ public class LeafNode implements BinNode {
         int xEnd,
         int yEnd,
         int level,
-        int numNodes,
-        BinNode fly) {
+        int numNodes) {
         if (seminars.size() == 0) {
             return numNodes;
         }
