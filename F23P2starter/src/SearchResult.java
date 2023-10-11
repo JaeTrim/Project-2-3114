@@ -1,34 +1,62 @@
 /**
+ * Search Result Class
  * 
+ * @author Jae Trimboli (jaetrim)
+ * @author Mohammad Mian (mohammadm21)
+ * @version 10-10-2023
  */
 public class SearchResult {
-    
+
     String output;
     int nodesVisited;
-    
-    public SearchResult()  
-    {        
+
+    /**
+     * Constructor for SearchResult
+     */
+    public SearchResult() {
         output = "";
         nodesVisited = 1;
     }
-    
-    public int getNodesVisited()
-    {
+
+
+    /**
+     * Returns the nodes visited in a search
+     * 
+     * @return how many nodesVisited
+     */
+    public int getNodesVisited() {
         return nodesVisited;
     }
-    
-    public String getOutput()
-    {
+
+
+    /**
+     * Gets String output
+     * 
+     * @return output for String
+     */
+    public String getOutput() {
         return output;
     }
-    
-    public void setNodesVisited(int num)
-    {
+
+
+    /**
+     * Sets the amount of nodes that were visited
+     * 
+     * @param num
+     *            is new nodes visited
+     */
+    public void setNodesVisited(int num) {
         nodesVisited = num;
     }
-    
-    public void setOutput(String str)
-    {
+
+
+    /**
+     * Sets the output for proper printing
+     * 
+     * @param str
+     *            new output
+     */
+    public void setOutput(String str) {
         output = str;
     }
 }

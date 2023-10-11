@@ -1,11 +1,22 @@
 import student.TestCase;
 
+/**
+ * BinTree Test Class
+ * 
+ * @author Jae Trimboli (jaetrim)
+ * @author Mohammad Mian (mohammadm21)
+ * @version 10-09-2023
+ */
+
 public class BinTreeTest extends TestCase {
 
     private BinTree tree;
     private LeafNode flyNode;
     private BinNode root;
 
+    /**
+     * setUp Constructor
+     */
     public void setUp() {
         tree = new BinTree(128);
         flyNode = new LeafNode();
@@ -13,13 +24,15 @@ public class BinTreeTest extends TestCase {
     }
 
 
+    /**
+     * Tests insert when tree is empty
+     */
     public void testInsertEmpty() {
         short x = 10;
         short y = 20;
         Seminar sem = new Seminar(1, "", "", 0, x, y, 0, new String[] { "" },
             "");
         tree.insert(sem);
-        BinNode root = tree.getRoot();
         assertTrue(root instanceof LeafNode);
         systemOut().clearHistory();
         tree.print();
@@ -28,6 +41,9 @@ public class BinTreeTest extends TestCase {
     }
 
 
+    /**
+     * Tests insert and deletetions for all seminars in tree
+     */
     public void testInsertAndDelete() {
         short x1 = 10;
         short y1 = 20;
@@ -44,20 +60,24 @@ public class BinTreeTest extends TestCase {
         tree.insert(sem1);
         tree.insert(sem2);
         tree.insert(sem3);
-        BinNode root = tree.getRoot();
-        assertTrue(root instanceof InternalNode);
+        BinNode localRoot = tree.getRoot();
+        assertTrue(localRoot instanceof InternalNode);
         tree.delete(sem2);
         tree.delete(sem1);
         tree.delete(sem3);
-        root = tree.getRoot();
-        assertTrue(root instanceof LeafNode);
+        localRoot = tree.getRoot();
+        assertTrue(localRoot instanceof LeafNode);
         systemOut().clearHistory();
         tree.print();
         String history = systemOut().getHistory();
         assertEquals(history, "E\n");
     }
-    
-    public void testInsertAndDelete2() {
+
+
+    /**
+     * Tests the BinTree with all commands
+     */
+    public void testTreeCommands() {
         BinTree nTree = new BinTree(256);
         short x1 = 130;
         short y1 = 120;
@@ -102,34 +122,19 @@ public class BinTreeTest extends TestCase {
         systemOut().clearHistory();
         nTree.print();
         String history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  I\r\n"
-            + "    Leaf with 1 objects: 2\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
-            + "        Leaf with 1 objects: 3\r\n"
-            + "        I\r\n"
-            + "          I\r\n"
-            + "            E\r\n"
-            + "            I\r\n"
-            + "              E\r\n"
-            + "              I\r\n"
-            + "                E\r\n"
-            + "                I\r\n"
-            + "                  I\r\n"
-            + "                    E\r\n"
+        assertEquals(history, "I\r\n" + "  I\r\n"
+            + "    Leaf with 1 objects: 2\r\n" + "    I\r\n" + "      I\r\n"
+            + "        Leaf with 1 objects: 3\r\n" + "        I\r\n"
+            + "          I\r\n" + "            E\r\n" + "            I\r\n"
+            + "              E\r\n" + "              I\r\n"
+            + "                E\r\n" + "                I\r\n"
+            + "                  I\r\n" + "                    E\r\n"
             + "                    I\r\n"
             + "                      Leaf with 1 objects: 5\r\n"
             + "                      Leaf with 3 objects: 7 8 9\r\n"
-            + "                  E\r\n"
-            + "          E\r\n"
-            + "      E\r\n"
-            + "  I\r\n"
-            + "    I\r\n"
-            + "      Leaf with 1 objects: 1\r\n"
-            + "      Leaf with 1 objects: 4\r\n"
-            + "    E\r\n"
-            + "");
+            + "                  E\r\n" + "          E\r\n" + "      E\r\n"
+            + "  I\r\n" + "    I\r\n" + "      Leaf with 1 objects: 1\r\n"
+            + "      Leaf with 1 objects: 4\r\n" + "    E\r\n" + "");
         systemOut().clearHistory();
         nTree.search(x1, y1, 3);
         nTree.search(x6, y6, 0);
@@ -174,8 +179,7 @@ public class BinTreeTest extends TestCase {
             + "Found a record with key value 7 at 20, 255\r\n"
             + "Found a record with key value 8 at 20, 255\r\n"
             + "Found a record with key value 9 at 20, 255\r\n"
-            + "12 nodes visited in this search\r\n"
-            + "");
+            + "12 nodes visited in this search\r\n" + "");
         nTree.delete(sem2);
         nTree.delete(sem1);
         nTree.delete(sem3);
@@ -184,30 +188,17 @@ public class BinTreeTest extends TestCase {
         systemOut().clearHistory();
         nTree.print();
         history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  I\r\n"
-            + "    E\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
-            + "        E\r\n"
-            + "        I\r\n"
-            + "          I\r\n"
-            + "            E\r\n"
-            + "            I\r\n"
-            + "              E\r\n"
-            + "              I\r\n"
-            + "                E\r\n"
-            + "                I\r\n"
-            + "                  I\r\n"
-            + "                    E\r\n"
+        assertEquals(history, "I\r\n" + "  I\r\n" + "    E\r\n" + "    I\r\n"
+            + "      I\r\n" + "        E\r\n" + "        I\r\n"
+            + "          I\r\n" + "            E\r\n" + "            I\r\n"
+            + "              E\r\n" + "              I\r\n"
+            + "                E\r\n" + "                I\r\n"
+            + "                  I\r\n" + "                    E\r\n"
             + "                    I\r\n"
             + "                      Leaf with 1 objects: 5\r\n"
             + "                      Leaf with 1 objects: 9\r\n"
-            + "                  E\r\n"
-            + "          E\r\n"
-            + "      E\r\n"
-            + "  Leaf with 1 objects: 4\r\n"
-            + "");
+            + "                  E\r\n" + "          E\r\n" + "      E\r\n"
+            + "  Leaf with 1 objects: 4\r\n" + "");
         nTree.delete(sem6);
         nTree.delete(sem5);
         nTree.delete(sem4);
@@ -219,20 +210,20 @@ public class BinTreeTest extends TestCase {
         assertEquals(history, "E\n");
         short x10 = 127;
         short y10 = 127;
-        Seminar sem10 = new Seminar(10, "", "", 0, x10, y10, 0, new String[] { "" },
-            "");
+        Seminar sem10 = new Seminar(10, "", "", 0, x10, y10, 0, new String[] {
+            "" }, "");
         short x11 = 127;
         short y11 = 128;
-        Seminar sem11 = new Seminar(11, "", "", 0, x11, y11, 0, new String[] { "" },
-            "");
+        Seminar sem11 = new Seminar(11, "", "", 0, x11, y11, 0, new String[] {
+            "" }, "");
         short x12 = 128;
         short y12 = 127;
-        Seminar sem12 = new Seminar(12, "", "", 0, x12, y12, 0, new String[] { "" },
-            "");
+        Seminar sem12 = new Seminar(12, "", "", 0, x12, y12, 0, new String[] {
+            "" }, "");
         short x13 = 128;
         short y13 = 128;
-        Seminar sem13 = new Seminar(13, "", "", 0, x13, y13, 0, new String[] { "" },
-            "");
+        Seminar sem13 = new Seminar(13, "", "", 0, x13, y13, 0, new String[] {
+            "" }, "");
         nTree.insert(sem10);
         nTree.insert(sem11);
         nTree.insert(sem12);
@@ -240,14 +231,11 @@ public class BinTreeTest extends TestCase {
         systemOut().clearHistory();
         nTree.print();
         history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  I\r\n"
+        assertEquals(history, "I\r\n" + "  I\r\n"
             + "    Leaf with 1 objects: 10\r\n"
-            + "    Leaf with 1 objects: 11\r\n"
-            + "  I\r\n"
+            + "    Leaf with 1 objects: 11\r\n" + "  I\r\n"
             + "    Leaf with 1 objects: 12\r\n"
-            + "    Leaf with 1 objects: 13\r\n"
-            + "");
+            + "    Leaf with 1 objects: 13\r\n" + "");
         systemOut().clearHistory();
         nTree.search(x10, y10, 0);
         nTree.search(x11, y11, 0);
@@ -265,8 +253,7 @@ public class BinTreeTest extends TestCase {
             + "3 nodes visited in this search\r\n"
             + "Seminars within 0 units of 128, 128:\r\n"
             + "Found a record with key value 13 at 128, 128\r\n"
-            + "3 nodes visited in this search\r\n"
-            + "");
+            + "3 nodes visited in this search\r\n" + "");
         nTree.delete(sem10);
         nTree.delete(sem11);
         nTree.delete(sem12);
@@ -282,18 +269,18 @@ public class BinTreeTest extends TestCase {
         systemOut().clearHistory();
         nTree.print();
         history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  I\r\n"
+        assertEquals(history, "I\r\n" + "  I\r\n"
             + "    Leaf with 1 objects: 10\r\n"
-            + "    Leaf with 1 objects: 11\r\n"
-            + "  I\r\n"
+            + "    Leaf with 1 objects: 11\r\n" + "  I\r\n"
             + "    Leaf with 1 objects: 12\r\n"
-            + "    Leaf with 1 objects: 13\r\n"
-            + "");
+            + "    Leaf with 1 objects: 13\r\n" + "");
     }
-    
-    public void testInsertDeleteSearch()
-    {
+
+
+    /**
+     * Tests the BinTree with all commands further
+     */
+    public void testTreeCommands2() {
         BinTree nTree = new BinTree(256);
         short x1 = 134;
         short y1 = 76;
@@ -333,20 +320,17 @@ public class BinTreeTest extends TestCase {
             "");
         short x10 = 2;
         short y10 = 2;
-        Seminar sem10 = new Seminar(10, "", "", 0, x10, y10, 0, new String[] { "" },
-            "");
+        Seminar sem10 = new Seminar(10, "", "", 0, x10, y10, 0, new String[] {
+            "" }, "");
         nTree.insert(sem7);
         nTree.insert(sem2);
         nTree.insert(sem1);
         systemOut().clearHistory();
         nTree.print();
         String history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  Leaf with 1 objects: 2\r\n"
-            + "  I\r\n"
-            + "    Leaf with 1 objects: 1\r\n"
-            + "    Leaf with 1 objects: 7\r\n"
-            + "");
+        assertEquals(history, "I\r\n" + "  Leaf with 1 objects: 2\r\n"
+            + "  I\r\n" + "    Leaf with 1 objects: 1\r\n"
+            + "    Leaf with 1 objects: 7\r\n" + "");
         systemOut().clearHistory();
         nTree.search(x1, y1, 0);
         nTree.search(x2, y2, 0);
@@ -371,72 +355,40 @@ public class BinTreeTest extends TestCase {
             + "2 nodes visited in this search\r\n"
             + "Seminars within 0 units of 2, 2:\r\n"
             + "Found a record with key value 10 at 2, 2\r\n"
-            + "14 nodes visited in this search\r\n"
-            + "");
+            + "14 nodes visited in this search\r\n" + "");
         nTree.delete(sem7);
         systemOut().clearHistory();
         nTree.print();
         history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  I\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
-            + "        I\r\n"
-            + "          I\r\n"
-            + "            I\r\n"
-            + "              I\r\n"
-            + "                I\r\n"
-            + "                  I\r\n"
-            + "                    I\r\n"
-            + "                      I\r\n"
-            + "                        I\r\n"
+        assertEquals(history, "I\r\n" + "  I\r\n" + "    I\r\n" + "      I\r\n"
+            + "        I\r\n" + "          I\r\n" + "            I\r\n"
+            + "              I\r\n" + "                I\r\n"
+            + "                  I\r\n" + "                    I\r\n"
+            + "                      I\r\n" + "                        I\r\n"
             + "                          Leaf with 1 objects: 2\r\n"
             + "                          Leaf with 1 objects: 10\r\n"
-            + "                        E\r\n"
-            + "                      E\r\n"
-            + "                    E\r\n"
-            + "                  E\r\n"
-            + "                E\r\n"
-            + "              E\r\n"
-            + "            E\r\n"
-            + "          E\r\n"
-            + "        E\r\n"
-            + "      E\r\n"
-            + "    E\r\n"
-            + "  Leaf with 1 objects: 1\r\n"
+            + "                        E\r\n" + "                      E\r\n"
+            + "                    E\r\n" + "                  E\r\n"
+            + "                E\r\n" + "              E\r\n"
+            + "            E\r\n" + "          E\r\n" + "        E\r\n"
+            + "      E\r\n" + "    E\r\n" + "  Leaf with 1 objects: 1\r\n"
             + "");
         nTree.delete(sem1);
         systemOut().clearHistory();
         nTree.print();
         history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  I\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
-            + "        I\r\n"
-            + "          I\r\n"
-            + "            I\r\n"
-            + "              I\r\n"
-            + "                I\r\n"
-            + "                  I\r\n"
-            + "                    I\r\n"
-            + "                      I\r\n"
-            + "                        I\r\n"
+        assertEquals(history, "I\r\n" + "  I\r\n" + "    I\r\n" + "      I\r\n"
+            + "        I\r\n" + "          I\r\n" + "            I\r\n"
+            + "              I\r\n" + "                I\r\n"
+            + "                  I\r\n" + "                    I\r\n"
+            + "                      I\r\n" + "                        I\r\n"
             + "                          Leaf with 1 objects: 2\r\n"
             + "                          Leaf with 1 objects: 10\r\n"
-            + "                        E\r\n"
-            + "                      E\r\n"
-            + "                    E\r\n"
-            + "                  E\r\n"
-            + "                E\r\n"
-            + "              E\r\n"
-            + "            E\r\n"
-            + "          E\r\n"
-            + "        E\r\n"
-            + "      E\r\n"
-            + "    E\r\n"
-            + "  E\r\n"
-            + "");
+            + "                        E\r\n" + "                      E\r\n"
+            + "                    E\r\n" + "                  E\r\n"
+            + "                E\r\n" + "              E\r\n"
+            + "            E\r\n" + "          E\r\n" + "        E\r\n"
+            + "      E\r\n" + "    E\r\n" + "  E\r\n" + "");
         systemOut().clearHistory();
         nTree.insert(sem3);
         nTree.insert(sem7);
@@ -465,75 +417,39 @@ public class BinTreeTest extends TestCase {
             + "Found a record with key value 3 at 43, 177\r\n"
             + "Found a record with key value 5 at 19, 255\r\n"
             + "Found a record with key value 8 at 20, 255\r\n"
-            + "30 nodes visited in this search\r\n"
-            + "I\r\n"
-            + "  I\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
-            + "        I\r\n"
-            + "          I\r\n"
-            + "            I\r\n"
-            + "              I\r\n"
-            + "                I\r\n"
-            + "                  I\r\n"
-            + "                    I\r\n"
-            + "                      I\r\n"
+            + "30 nodes visited in this search\r\n" + "I\r\n" + "  I\r\n"
+            + "    I\r\n" + "      I\r\n" + "        I\r\n" + "          I\r\n"
+            + "            I\r\n" + "              I\r\n"
+            + "                I\r\n" + "                  I\r\n"
+            + "                    I\r\n" + "                      I\r\n"
             + "                        I\r\n"
             + "                          Leaf with 1 objects: 2\r\n"
             + "                          Leaf with 1 objects: 10\r\n"
-            + "                        E\r\n"
-            + "                      E\r\n"
-            + "                    E\r\n"
-            + "                  E\r\n"
-            + "                E\r\n"
-            + "              E\r\n"
-            + "            E\r\n"
-            + "          E\r\n"
-            + "        E\r\n"
-            + "      E\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
-            + "        Leaf with 2 objects: 3 3\r\n"
-            + "        I\r\n"
-            + "          I\r\n"
-            + "            E\r\n"
-            + "            I\r\n"
-            + "              E\r\n"
-            + "              I\r\n"
-            + "                E\r\n"
-            + "                I\r\n"
-            + "                  I\r\n"
-            + "                    E\r\n"
+            + "                        E\r\n" + "                      E\r\n"
+            + "                    E\r\n" + "                  E\r\n"
+            + "                E\r\n" + "              E\r\n"
+            + "            E\r\n" + "          E\r\n" + "        E\r\n"
+            + "      E\r\n" + "    I\r\n" + "      I\r\n"
+            + "        Leaf with 2 objects: 3 3\r\n" + "        I\r\n"
+            + "          I\r\n" + "            E\r\n" + "            I\r\n"
+            + "              E\r\n" + "              I\r\n"
+            + "                E\r\n" + "                I\r\n"
+            + "                  I\r\n" + "                    E\r\n"
             + "                    I\r\n"
             + "                      Leaf with 1 objects: 5\r\n"
             + "                      Leaf with 1 objects: 8\r\n"
-            + "                  E\r\n"
-            + "          E\r\n"
-            + "      E\r\n"
-            + "  I\r\n"
-            + "    I\r\n"
-            + "      Leaf with 1 objects: 1\r\n"
-            + "      I\r\n"
-            + "        I\r\n"
-            + "          E\r\n"
-            + "          I\r\n"
-            + "            I\r\n"
-            + "              E\r\n"
-            + "              I\r\n"
-            + "                E\r\n"
-            + "                I\r\n"
-            + "                  I\r\n"
+            + "                  E\r\n" + "          E\r\n" + "      E\r\n"
+            + "  I\r\n" + "    I\r\n" + "      Leaf with 1 objects: 1\r\n"
+            + "      I\r\n" + "        I\r\n" + "          E\r\n"
+            + "          I\r\n" + "            I\r\n" + "              E\r\n"
+            + "              I\r\n" + "                E\r\n"
+            + "                I\r\n" + "                  I\r\n"
             + "                    Leaf with 1 objects: 6\r\n"
             + "                    Leaf with 1 objects: 4\r\n"
-            + "                  E\r\n"
-            + "            E\r\n"
-            + "        E\r\n"
-            + "    I\r\n"
-            + "      E\r\n"
-            + "      I\r\n"
+            + "                  E\r\n" + "            E\r\n" + "        E\r\n"
+            + "    I\r\n" + "      E\r\n" + "      I\r\n"
             + "        Leaf with 1 objects: 7\r\n"
-            + "        Leaf with 1 objects: 9\r\n"
-            + "");
+            + "        Leaf with 1 objects: 9\r\n" + "");
         nTree.delete(sem6);
         nTree.delete(sem9);
         nTree.delete(sem7);
@@ -541,42 +457,22 @@ public class BinTreeTest extends TestCase {
         systemOut().clearHistory();
         nTree.print();
         history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  I\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
-            + "        I\r\n"
-            + "          I\r\n"
-            + "            I\r\n"
-            + "              I\r\n"
-            + "                I\r\n"
-            + "                  I\r\n"
-            + "                    I\r\n"
-            + "                      I\r\n"
-            + "                        I\r\n"
+        assertEquals(history, "I\r\n" + "  I\r\n" + "    I\r\n" + "      I\r\n"
+            + "        I\r\n" + "          I\r\n" + "            I\r\n"
+            + "              I\r\n" + "                I\r\n"
+            + "                  I\r\n" + "                    I\r\n"
+            + "                      I\r\n" + "                        I\r\n"
             + "                          Leaf with 1 objects: 2\r\n"
             + "                          Leaf with 1 objects: 10\r\n"
-            + "                        E\r\n"
-            + "                      E\r\n"
-            + "                    E\r\n"
-            + "                  E\r\n"
-            + "                E\r\n"
-            + "              E\r\n"
-            + "            E\r\n"
-            + "          E\r\n"
-            + "        E\r\n"
-            + "      E\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
+            + "                        E\r\n" + "                      E\r\n"
+            + "                    E\r\n" + "                  E\r\n"
+            + "                E\r\n" + "              E\r\n"
+            + "            E\r\n" + "          E\r\n" + "        E\r\n"
+            + "      E\r\n" + "    I\r\n" + "      I\r\n"
             + "        Leaf with 2 objects: 3 3\r\n"
-            + "        Leaf with 1 objects: 8\r\n"
-            + "      E\r\n"
-            + "  I\r\n"
-            + "    I\r\n"
-            + "      Leaf with 1 objects: 1\r\n"
-            + "      Leaf with 1 objects: 4\r\n"
-            + "    E\r\n"
-            + "");
+            + "        Leaf with 1 objects: 8\r\n" + "      E\r\n" + "  I\r\n"
+            + "    I\r\n" + "      Leaf with 1 objects: 1\r\n"
+            + "      Leaf with 1 objects: 4\r\n" + "    E\r\n" + "");
         nTree.delete(sem1);
         nTree.delete(sem2);
         nTree.delete(sem10);
@@ -585,27 +481,23 @@ public class BinTreeTest extends TestCase {
         systemOut().clearHistory();
         nTree.print();
         history = systemOut().getHistory();
-        assertEquals(history, "I\r\n"
-            + "  I\r\n"
-            + "    E\r\n"
-            + "    I\r\n"
-            + "      I\r\n"
-            + "        Leaf with 1 objects: 3\r\n"
-            + "        Leaf with 1 objects: 8\r\n"
-            + "      E\r\n"
-            + "  E\r\n"
+        assertEquals(history, "I\r\n" + "  I\r\n" + "    E\r\n" + "    I\r\n"
+            + "      I\r\n" + "        Leaf with 1 objects: 3\r\n"
+            + "        Leaf with 1 objects: 8\r\n" + "      E\r\n" + "  E\r\n"
             + "");
         nTree.delete(sem8);
         nTree.delete(sem3);
         systemOut().clearHistory();
         nTree.print();
         history = systemOut().getHistory();
-        assertEquals(history, "E\r\n"
-            + "");
+        assertEquals(history, "E\r\n" + "");
     }
-    
-    public void testSearch()
-    {
+
+
+    /**
+     * Test Search
+     */
+    public void testSearch() {
         BinTree nTree = new BinTree(4);
         short x1 = 1;
         short y1 = 1;
@@ -622,19 +514,21 @@ public class BinTreeTest extends TestCase {
         nTree.insert(sem1);
         nTree.insert(sem2);
         nTree.insert(sem3);
-        systemOut().clearHistory();    
+        systemOut().clearHistory();
         nTree.search(x1, y1, 1);
         String history = systemOut().getHistory();
         assertEquals(history, "Seminars within 1 units of 1, 1:\r\n"
             + "Found a record with key value 1 at 1, 1\r\n"
             + "Found a record with key value 2 at 1, 2\r\n"
             + "Found a record with key value 3 at 2, 1\r\n"
-            + "5 nodes visited in this search\r\n"
-            + "");
+            + "5 nodes visited in this search\r\n" + "");
     }
-    
-    public void testInsertDeleteSearch3()
-    {
+
+
+    /**
+     * Test more inserts
+     */
+    public void testInsert() {
         BinTree nTree = new BinTree(256);
         short x1 = 1;
         short y1 = 10;
@@ -664,6 +558,10 @@ public class BinTreeTest extends TestCase {
         nTree.print();
     }
 
+
+    /**
+     * Test more inserts
+     */
     public void testInsertOtherCase() {
         short x1 = 10;
         short y1 = 20;
@@ -675,45 +573,61 @@ public class BinTreeTest extends TestCase {
             "");
         tree.insert(sem1);
         tree.insert(sem2);
-        BinNode root = tree.getRoot();
-        assertTrue(root instanceof InternalNode);
+        BinNode localRoot = tree.getRoot();
+        assertTrue(localRoot instanceof InternalNode);
         systemOut().clearHistory();
         tree.print();
         String history = systemOut().getHistory();
-        assertEquals(history, "I\n  I\n    I\n      I\n        Leaf with 1 objects: 1\n        Leaf with 1 objects: 2\n      E\n    E\n  E\n");
+        assertEquals(history,
+            "I\n  I\n    I\n      I\n        Leaf with 1 objects: 1\n        "
+                + "Leaf with 1 objects: 2\n      E\n    E\n  E\n");
     }
-    
+
+
+    /**
+     * Test more inserts for duplicates
+     */
     public void testInsertDuplicate() {
         short x = 40;
         short y = 60;
-        Seminar sem1 = new Seminar(1, "Seminar 1", "Description 1", 0, x, y, 0, new String[] { "" }, "");
-        Seminar sem2 = new Seminar(2, "Seminar 2", "Description 2", 0, x, y, 0, new String[] { "" }, "");
+        Seminar sem1 = new Seminar(1, "Seminar 1", "Description 1", 0, x, y, 0,
+            new String[] { "" }, "");
+        Seminar sem2 = new Seminar(2, "Seminar 2", "Description 2", 0, x, y, 0,
+            new String[] { "" }, "");
         tree.insert(sem1);
         tree.insert(sem2);
-        BinNode root = tree.getRoot();
-        assertTrue(root instanceof LeafNode);
+        BinNode localRoot = tree.getRoot();
+        assertTrue(localRoot instanceof LeafNode);
         systemOut().clearHistory();
         tree.print();
         String history = systemOut().getHistory();
         assertEquals(history, "Leaf with 2 objects: 1 2\n");
     }
-    
+
+
+    /**
+     * Test more inserts
+     */
     public void testInsertSeminarSplitting() {
-        Seminar seminar1 = new Seminar(1, "Seminar 1", "2023-10-10", 60, (short) 70, (short) 70, 100, new String[]{"keyword1"}, "Description 1");
-        Seminar seminar2 = new Seminar(2, "Seminar 2", "2023-10-11", 90, (short) 60, (short) 60, 150, new String[]{"keyword2"}, "Description 2");
+        Seminar seminar1 = new Seminar(1, "Seminar 1", "2023-10-10", 60,
+            (short)70, (short)70, 100, new String[] { "keyword1" },
+            "Description 1");
+        Seminar seminar2 = new Seminar(2, "Seminar 2", "2023-10-11", 90,
+            (short)60, (short)60, 150, new String[] { "keyword2" },
+            "Description 2");
 
         tree.insert(seminar1);
         tree.insert(seminar2);
 
-        BinNode root = tree.getRoot();
-        assertTrue(root instanceof InternalNode);
+        BinNode localRoot = tree.getRoot();
+        assertTrue(localRoot instanceof InternalNode);
 
-        InternalNode internalNode = (InternalNode) root;
+        InternalNode internalNode = (InternalNode)localRoot;
         assertTrue(internalNode.left() instanceof LeafNode);
         assertTrue(internalNode.right() instanceof LeafNode);
 
-        LeafNode leftLeaf = (LeafNode) internalNode.left();
-        LeafNode rightLeaf = (LeafNode) internalNode.right();
+        LeafNode leftLeaf = (LeafNode)internalNode.left();
+        LeafNode rightLeaf = (LeafNode)internalNode.right();
 
         assertEquals(1, leftLeaf.value().size());
         assertEquals(seminar2, leftLeaf.value().get(0));
@@ -723,9 +637,14 @@ public class BinTreeTest extends TestCase {
         systemOut().clearHistory();
         tree.print();
         String history = systemOut().getHistory();
-        assertEquals(history, "I\n  Leaf with 1 objects: 2\n  Leaf with 1 objects: 1\n");
+        assertEquals(history,
+            "I\n  Leaf with 1 objects: 2\n  Leaf with 1 objects: 1\n");
     }
 
+
+    /**
+     * Test more inserts and deletes
+     */
     public void testDelete() {
         short x1 = 10;
         short y1 = 20;
@@ -738,14 +657,18 @@ public class BinTreeTest extends TestCase {
         tree.insert(sem1);
         tree.insert(sem2);
         tree.delete(sem1);
-        BinNode root = tree.getRoot();
-        assertTrue(root instanceof LeafNode);
+        BinNode localRoot = tree.getRoot();
+        assertTrue(localRoot instanceof LeafNode);
         systemOut().clearHistory();
         tree.print();
         String history = systemOut().getHistory();
         assertEquals(history, "Leaf with 1 objects: 2\n");
     }
-    
+
+
+    /**
+     * Tests print
+     */
     public void testPrint() {
         short x1 = 10;
         short y1 = 20;
@@ -769,4 +692,139 @@ public class BinTreeTest extends TestCase {
             + "Leaf with 1 objects: 3 \r\n" + "E\r\n" + "E";
         assertFuzzyEquals(systemOut().getHistory(), out);
     }
+
+
+    /**
+     * Tests delete Edge Case
+     */
+    public void testDeleteEdge() {
+        tree = new BinTree(128);
+        Seminar firstSeminar = new Seminar(1, "Seminar 1", "Description 1", 0,
+            (short)10, (short)20, 0, new String[] { "" }, "");
+        Seminar secondSeminar = new Seminar(1, "Seminar 1", "Description 1", 0,
+            (short)30, (short)40, 0, new String[] { "" }, "");
+
+        tree.insert(firstSeminar);
+        tree.insert(secondSeminar);
+        tree.search(10, 20, 1);
+        assertFuzzyEquals(systemOut().getHistory(),
+            "Seminars within 1 units of 10, 20:\r\n"
+                + "Found a record with key value 1 at 10, 20\r\n"
+                + "5 nodes visited in this search");
+        tree.delete(firstSeminar);
+        tree.search(10, 20, 1);
+        assertFuzzyEquals(systemOut().getHistory(),
+            "Seminars within 1 units of 10, 20:\r\n"
+                + "Found a record with key value 1 at 10, 20\r\n"
+                + "5 nodes visited in this search\r\n"
+                + "Seminars within 1 units of 10, 20:\r\n"
+                + "1 nodes visited in this search");
+        tree.search(30, 40, 1);
+        assertFuzzyEquals(systemOut().getHistory(),
+            "Seminars within 1 units of 10, 20:\r\n"
+                + "Found a record with key value 1 at 10, 20\r\n"
+                + "5 nodes visited in this search\r\n"
+                + "Seminars within 1 units of 10, 20:\r\n"
+                + "1 nodes visited in this search\r\n"
+                + "Seminars within 1 units of 30, 40:\r\n"
+                + "Found a record with key value 1 at 30, 40\r\n"
+                + "1 nodes visited in this search");
+
+    }
+
+
+    /**
+     * More delete tests
+     */
+    public void testDeleteMore() {
+        systemOut().clearHistory();
+        System.out.println("DELETE MORE");
+        tree = new BinTree(128);
+        Seminar firstSeminar = new Seminar(1, "Seminar 1", "Description 1", 0,
+            (short)10, (short)20, 0, new String[] { "" }, "");
+        Seminar secondSeminar = new Seminar(2, "Seminar 1", "Description 1", 0,
+            (short)30, (short)40, 0, new String[] { "" }, "");
+        tree.insert(firstSeminar);
+        tree.insert(secondSeminar);
+        tree.print();
+        assertFuzzyEquals(systemOut().getHistory(), "DELETE MORE\r\n" + "I\r\n"
+            + "  I\r\n" + "    I\r\n" + "      I\r\n"
+            + "        Leaf with 1 objects: 1\r\n"
+            + "        Leaf with 1 objects: 2\r\n" + "      E\r\n" + "    E\r\n"
+            + "  E");
+        tree.delete(firstSeminar);
+        systemOut().clearHistory();
+        tree.print();
+        assertFuzzyEquals(systemOut().getHistory(), "Leaf with 1 objects: 2");
+        secondSeminar = new Seminar(1111, "Seminar 1", "Description 1", 0,
+            (short)10, (short)20, 0, new String[] { "" }, "");
+        tree.delete(secondSeminar);
+        systemOut().clearHistory();
+        tree.print();
+        assertFuzzyEquals(systemOut().getHistory(), "Leaf with 1 objects: 2");
+        tree.insert(secondSeminar);
+        tree.insert(secondSeminar);
+        systemOut().clearHistory();
+        tree.print();
+        assertFuzzyEquals(systemOut().getHistory(), "I\r\n" + "  I\r\n"
+            + "    I\r\n" + "      I\r\n"
+            + "        Leaf with 2 objects: 1111 1111\r\n"
+            + "        Leaf with 1 objects: 2\r\n" + "      E\r\n" + "    E\r\n"
+            + "  E");
+        tree.delete(secondSeminar);
+        tree.delete(secondSeminar);
+        tree.delete(secondSeminar);
+        tree.delete(secondSeminar);
+        tree.delete(secondSeminar);
+        systemOut().clearHistory();
+        tree.print();
+        assertFuzzyEquals(systemOut().getHistory(), "Leaf with 1 objects: 2");
+        secondSeminar = new Seminar(10, "Seminar 1", "Description 1", 23,
+            (short)1120, (short)2120, 0, new String[] { "" }, "");
+        tree.insert(secondSeminar);
+        systemOut().clearHistory();
+        tree.print();
+        assertFuzzyEquals(systemOut().getHistory(), "I\r\n"
+            + "  Leaf with 1 objects: 2\r\n" + "  Leaf with 1 objects: 10");
+        tree = new BinTree(0);
+        tree.insert(firstSeminar);
+        systemOut().clearHistory();
+        tree.print();
+        assertFuzzyEquals(systemOut().getHistory(), "Leaf with 1 objects: 1");
+        systemOut().clearHistory();
+        tree.getRoot().print(0);
+        assertFuzzyEquals(systemOut().getHistory(), "Leaf with 1 objects: 1");
+        systemOut().clearHistory();
+        tree.getRoot().print(1);
+        assertFuzzyEquals(systemOut().getHistory(), "  Leaf with 1 objects: 1");
+        boolean thrown = false;
+        try {
+            tree.getRoot().insert(secondSeminar, flyNode, 0, 0, 0, 0, 0);
+        }
+        catch (StackOverflowError e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+        thrown = false;
+        tree.getRoot().insert(firstSeminar, flyNode, 0, 0, 128, 128, 0);
+        tree.getRoot().print(0);
+        assertFuzzyEquals(systemOut().getHistory(),
+            "  Leaf with 1 objects: 1\r\n" + "Leaf with 2 objects: 1 1");
+        tree.getRoot().delete(secondSeminar, 0, 0, 0, 128, 128, flyNode);
+        tree.getRoot().delete(firstSeminar, 0, 0, 0, 128, 128, flyNode);
+        tree.getRoot().print(0);
+        assertFuzzyEquals(systemOut().getHistory(),
+            "  Leaf with 1 objects: 1\r\n" + "Leaf with 2 objects: 1 1\r\n"
+                + "Leaf with 1 objects: 1");
+        tree = new BinTree(128);
+        try {
+            tree.delete(firstSeminar);
+        }
+        catch (IndexOutOfBoundsException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+    }
+
 }

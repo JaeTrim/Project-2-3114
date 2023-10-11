@@ -50,7 +50,6 @@ public class SeminarDB {
         KVPair<String, Seminar> datePair = new KVPair<String, Seminar>(sem
             .date(), sem);
 
-
         if (idTree.find(sem.id()) == null) {
             if (sem.x() < 0 || sem.y() < 0 || sem.x() >= worldSize || sem
                 .y() >= worldSize) {
@@ -67,8 +66,8 @@ public class SeminarDB {
                         new KVPair<String, Seminar>(sem.keywords()[i], sem);
                     keywordTree.insert(keywordPair);
                 }
-                System.out.println("Successfully inserted record with ID "
-                    + sem.id());
+                System.out.println("Successfully inserted record with ID " + sem
+                    .id());
                 System.out.println(sem.toString());
             }
         }
@@ -109,12 +108,13 @@ public class SeminarDB {
      *            is high cost
      */
     public void searchCost(int low, int high) {
-        System.out.println("Seminars with costs in range " + low + " to "
-            + high + ":");
+        System.out.println("Seminars with costs in range " + low + " to " + high
+            + ":");
         SearchResult output = new SearchResult();
         output = costTree.rangeSearch(costTree.getRoot(), low, high, output);
         System.out.print(output.getOutput());
-        System.out.println(output.getNodesVisited() + " nodes visited in this search");
+        System.out.println(output.getNodesVisited()
+            + " nodes visited in this search");
     }
 
 
@@ -132,10 +132,10 @@ public class SeminarDB {
         System.out.println("Seminars with dates in range " + date1 + " to "
             + date2 + ":");
         SearchResult output = new SearchResult();
-        output = dateTree.rangeSearch(dateTree.getRoot(), date1,
-            date2, output);
+        output = dateTree.rangeSearch(dateTree.getRoot(), date1, date2, output);
         System.out.print(output.getOutput());
-        System.out.println(output.getNodesVisited() + " nodes visited in this search");
+        System.out.println(output.getNodesVisited()
+            + " nodes visited in this search");
     }
 
 
@@ -148,7 +148,8 @@ public class SeminarDB {
     public void searchKeyword(String word) {
         System.out.println("Seminars matching keyword " + word + ":");
         SearchResult output = new SearchResult();
-        output = keywordTree.rangeSearch(keywordTree.getRoot(), word, word, output);
+        output = keywordTree.rangeSearch(keywordTree.getRoot(), word, word,
+            output);
         System.out.print(output.getOutput());
     }
 
@@ -182,10 +183,7 @@ public class SeminarDB {
             idTree.remove(id, curr);
             costTree.remove(curr.cost(), curr);
             for (int i = 0; i < curr.keywords().length; i++) {
-                //System.out.println("\n" + curr.keywords()[i] + keywordTree.findValue(curr.keywords()[i], curr).value().value());
-               // keywordTree.remove(curr.keywords()[i]);
                 keywordTree.remove(curr.keywords()[i], curr);
-                
             }
             dateTree.remove(curr.date(), curr);
             location.delete(curr);
@@ -204,6 +202,7 @@ public class SeminarDB {
      * corresponding tree
      * 
      * @param command
+     *            for command
      */
     public void print(String command) {
 
