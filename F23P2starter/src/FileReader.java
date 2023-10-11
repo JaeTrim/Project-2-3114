@@ -43,44 +43,22 @@ public class FileReader {
             currLine = currLine.trim();
             if (currLine.contains("insert")) {
                 String[] insertLine = currLine.split("\\s+");
-                if (insertLine.length == 2) {
-                    char[] charArray = insertLine[1].toCharArray();
-                    boolean found = false;
-                    for (int i = 0; i < charArray.length; i++) {
-                        if (!Character.isDigit(charArray[i])) {
-                            found = true;
-                        }
-                    }
-                    if (found == false) {
-                        int id = Integer.parseInt(insertLine[1]);
-                        String title = scanner.nextLine().trim();
-                        String date = scanner.next().trim();
-                        int length = Integer.parseInt(scanner.next());
-                        short xCoord = Short.parseShort(scanner.next());
-                        short yCoord = Short.parseShort(scanner.next());
-                        int cost = Integer.parseInt(scanner.next());
-                        scanner.nextLine();
-                        String keywordLine = scanner.nextLine().trim();
-                        String[] keywords = keywordLine.split("\\s+");
-                        String description = scanner.nextLine();
-                        String formatDesc = description.trim();
-                        Seminar sem = new Seminar(id, title, date, length,
-                            xCoord, yCoord, cost, keywords, formatDesc);
-                        world.insert(sem);
-                    }
-                    else {
-                        scanner.nextLine();
-                        scanner.nextLine();
-                        scanner.nextLine();
-                        scanner.nextLine();
-                    }
-                }
-                else {
-                    scanner.nextLine();
-                    scanner.nextLine();
-                    scanner.nextLine();
-                    scanner.nextLine();
-                }
+                int id = Integer.parseInt(insertLine[1]);
+                String title = scanner.nextLine().trim();
+                String date = scanner.next().trim();
+                int length = Integer.parseInt(scanner.next());
+                short xCoord = Short.parseShort(scanner.next());
+                short yCoord = Short.parseShort(scanner.next());
+                int cost = Integer.parseInt(scanner.next());
+                scanner.nextLine();
+                String keywordLine = scanner.nextLine().trim();
+                String[] keywords = keywordLine.split("\\s+");
+                String description = scanner.nextLine();
+                String formatDesc = description.trim();
+                Seminar sem = new Seminar(id, title, date, length, xCoord,
+                    yCoord, cost, keywords, formatDesc);
+                world.insert(sem);
+
             }
             else if (currLine.contains("search")) {
                 String[] searchLine = currLine.split("\\s+");
@@ -98,17 +76,16 @@ public class FileReader {
                     int id = Integer.parseInt(searchLine[2]);
                     world.searchID(id);
                 }
-                else if (searchLine[1].equals("cost")) {
-                    int low = Integer.parseInt(searchLine[2]);
-                    int high = Integer.parseInt(searchLine[3]);
-                    world.searchCost(low, high);
-                }
                 else if (searchLine[1].equals("date")) {
                     String dateTime1 = searchLine[2];
                     String dateTime2 = searchLine[3];
                     world.searchDate(dateTime1, dateTime2);
                 }
-
+                else  {
+                    int low = Integer.parseInt(searchLine[2]);
+                    int high = Integer.parseInt(searchLine[3]);
+                    world.searchCost(low, high);
+                }
             }
             else if (currLine.contains("print")) {
                 String[] printLine = currLine.split("\\s+");

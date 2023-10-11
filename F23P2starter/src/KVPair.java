@@ -1,39 +1,81 @@
 /**
+ * KV Pair Class
  * 
+ * @author Jae Trimboli (jaetrim)
+ * @author Mohammad Mian (mohammadm21)
+ * @version 10-10-2023
+ * 
+ * @param <K>
+ *            tag
+ * @param <E>
+ *            tag
  */
 public class KVPair<K extends Comparable<K>, E>
     implements Comparable<KVPair<K, E>> {
     K theKey;
     E theVal;
 
+    /**
+     * KV Pair Constructor
+     * 
+     * @param k
+     *            key
+     * @param v
+     *            value
+     */
     KVPair(K k, E v) {
         theKey = k;
         theVal = v;
     }
 
 
-    // Compare KVPairs
+    /**
+     * Compares current key to new key
+     * 
+     * @param it
+     *            new KV Pair
+     */
     public int compareTo(KVPair<K, E> it) {
         return theKey.compareTo(it.key());
     }
 
 
-    // Compare against a key
+    /**
+     * Compares current key to new key with key directly passed through
+     * 
+     * @param it
+     *            new key
+     */
     public int compareTo(K it) {
         return theKey.compareTo(it);
     }
 
 
+    /**
+     * Returns the key
+     * 
+     * @return theKey is key
+     */
     public K key() {
         return theKey;
     }
 
 
+    /**
+     * Returns the value
+     * 
+     * @return theVal for value
+     */
     public E value() {
         return theVal;
     }
 
 
+    /**
+     * Returns KV Pair in string form
+     * 
+     * @return s for string
+     */
     public String toString() {
         String s = "(";
         if (theKey != null) {
